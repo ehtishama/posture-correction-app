@@ -3,10 +3,11 @@ import React from "react";
 import { colors } from "./styles/colors";
 import typography from "./styles/typography";
 import ExerciseItem from "./components/exerciseItem";
+import Button from "./components/button";
 
 const SessionScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={typography.titleLarge}>Basic</Text>
         <Text style={[typography.bodyMedium, styles.headerBodyText]}>
@@ -17,6 +18,9 @@ const SessionScreen = () => {
 
       {/* exercises list */}
       <ExerciseItem />
+      <View style={styles.startButton}>
+        <Button primary text="Start" />
+      </View>
     </View>
   );
 };
@@ -24,6 +28,9 @@ const SessionScreen = () => {
 export default SessionScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   header: {
     height: 240,
     display: "flex",
@@ -33,5 +40,13 @@ const styles = StyleSheet.create({
   },
   headerBodyText: {
     width: "80%",
+  },
+  startButton: {
+    position: "absolute",
+
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    bottom: 16,
   },
 });

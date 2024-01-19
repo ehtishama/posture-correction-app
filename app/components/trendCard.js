@@ -29,6 +29,7 @@ export const TrendCard = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    margin: 16,
     backgroundColor: colors.primary_10,
     borderRadius: 4,
   },
