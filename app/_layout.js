@@ -16,6 +16,13 @@ export default function Page() {
           headerShown: true,
         }}
       />
+
+      <Stack.Screen
+        name="exercise_screen"
+        options={{
+          headerShown: true,
+        }}
+      />
     </Stack>
   );
 }

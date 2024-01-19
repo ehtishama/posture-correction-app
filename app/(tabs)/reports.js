@@ -1,5 +1,17 @@
-import { Text } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Page() {
-  return <Text>Reports page</Text>;
+  return (
+    <View style={styles.container}>
+      <Text>Coming soon...</Text>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

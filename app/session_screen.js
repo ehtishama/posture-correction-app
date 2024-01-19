@@ -4,8 +4,11 @@ import { colors } from "./styles/colors";
 import typography from "./styles/typography";
 import ExerciseItem from "./components/exerciseItem";
 import Button from "./components/button";
+import { useNavigation } from "expo-router";
 
 const SessionScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -19,7 +22,11 @@ const SessionScreen = () => {
       {/* exercises list */}
       <ExerciseItem />
       <View style={styles.startButton}>
-        <Button primary text="Start" />
+        <Button
+          primary
+          text="Start"
+          onPress={() => navigation.navigate("exercise_screen")}
+        />
       </View>
     </View>
   );
