@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import typography from "../styles/typography";
 
 export const Header = () => {
   return (
@@ -11,7 +12,7 @@ export const Header = () => {
         width={40}
         style={styles.profileImage}
       />
-      <Text style={styles.logo}>Posture Perfect</Text>
+      <Text style={typography.titleMedium}>Posture Perfect</Text>
       <MaterialCommunityIcons name="bell-outline" size={24} color="black" />
     </View>
   );
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     backgroundColor: "white",
+    elevation: 4
   },
   logo: {
     fontWeight: "800",

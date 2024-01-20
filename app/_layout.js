@@ -7,6 +7,9 @@ export default function Page() {
         headerShown: false,
         statusBarTranslucent: false,
         statusBarStyle: "dark",
+        contentStyle: {
+          backgroundColor: "white",
+        },
       }}
     >
       <Stack.Screen name="(tabs)" />

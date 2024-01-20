@@ -1,19 +1,31 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Header } from "../components/header";
 import { Hero } from "../components/hero";
-import { TrackItem } from "../components/trackItem";
-import { ListHeader } from "../components/listHeader";
-import { StatusBar } from "expo-status-bar";
+
 import { TrendCard } from "../components/trendCard";
+import TracksList from "../components/tracksList";
+import { ListHeader } from "../components/listHeader";
 
 export default function Page() {
   return (
-    <View>
+    <View style={styles.container}>
       <Header />
-      <Hero />
-      <TrendCard />
-      <ListHeader />
-      <TrackItem />
+
+      <TracksList
+        header={
+          <>
+            <Hero />
+            <TrendCard />
+            <ListHeader />
+          </>
+        }
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
