@@ -3,18 +3,19 @@ import { Entypo } from "@expo/vector-icons";
 import React from "react";
 import { Link, useNavigation } from "expo-router";
 
-export const TrackItem = () => {
+export const TrackItem = ({item,  title, numExercises, duration }) => {
   const navigation = useNavigation();
-
+  
+  
   return (
     <Pressable onPress={() => navigation.navigate("session_screen")}>
       <View style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.title}>Basic</Text>
+          <Text style={styles.title}>{title}</Text>
           <View style={styles.desc}>
-            <Text>12 exercises </Text>
+            <Text>{numExercises} exercises </Text>
             <Entypo name="dot-single" size={16} color="black" />
-            <Text>20 mins</Text>
+            <Text>{duration / 60} mins</Text>
           </View>
         </View>
         <Image
