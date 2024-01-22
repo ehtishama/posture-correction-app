@@ -3,10 +3,15 @@ import { Entypo } from "@expo/vector-icons";
 import React from "react";
 import { Link, useNavigation } from "expo-router";
 
-export const TrackItem = ({item,  title, numExercises, duration }) => {
+export const TrackItem = ({
+  item,
+  title,
+  numExercises,
+  duration,
+  thumbnail,
+}) => {
   const navigation = useNavigation();
-  
-  
+
   return (
     <Pressable onPress={() => navigation.navigate("session_screen")}>
       <View style={styles.container}>
@@ -18,10 +23,7 @@ export const TrackItem = ({item,  title, numExercises, duration }) => {
             <Text>{duration / 60} mins</Text>
           </View>
         </View>
-        <Image
-          style={styles.cardImage}
-          source={{ uri: "https://picsum.photos/seed/1/140/160" }}
-        />
+        <Image style={styles.cardImage} source={thumbnail} />
       </View>
     </Pressable>
   );

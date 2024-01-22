@@ -10,18 +10,21 @@ const TracksList = ({ header }) => {
       title: "Basic",
       numExercises: 12,
       duration: 60 * 12,
+      thumbnail: require("../../assets/basic-plan.jpg"),
     },
     {
       id: 2,
       title: "Intermediate",
       numExercises: 16,
       duration: 60 * 16,
+      thumbnail: require("../../assets/intermediate-plan.jpg"),
     },
     {
       id: 3,
       title: "Advance",
       numExercises: 12,
       duration: 60 * 20,
+      thumbnail: require("../../assets/advance-plan.jpg"),
     },
   ];
 
@@ -35,6 +38,7 @@ const TracksList = ({ header }) => {
           title={track.item.title}
           numExercises={track.item.numExercises}
           duration={track.item.duration}
+          thumbnail={track.item.thumbnail}
         />
       )}
       ListHeaderComponent={header}

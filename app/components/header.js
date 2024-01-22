@@ -7,9 +7,7 @@ export const Header = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: "https://picsum.photos/seed/696/60/60" }}
-        height={40}
-        width={40}
+        source={require("../../assets/profile-placeholder.jpg")}
         style={styles.profileImage}
       />
       <Text style={typography.titleMedium}>Posture Perfect</Text>
@@ -26,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     backgroundColor: "white",
-    elevation: 4
+    elevation: 4,
   },
   logo: {
     fontWeight: "800",
@@ -34,5 +32,7 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     borderRadius: 30,
+    height: 30,
+    width: 30,
   },
 });
