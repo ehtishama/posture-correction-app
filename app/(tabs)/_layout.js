@@ -8,20 +8,6 @@ export default function Layout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "black",
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 12,
-          left: 16,
-          right: 16,
-          borderRadius: 40,
-          height: 70,
-          backgroundColor: colors.primary_20,
-          elevation: 0,
-          borderWidth: 2,
-          borderBottomWidth: 8,
-        },
-        tabBarShowLabel: false,
       }}
       tabBar={(props) => <BottomTab {...props} />}
       sceneContainerStyle={{ backgroundColor: "white" }}
@@ -41,6 +27,16 @@ export default function Layout() {
           title: "Reports",
           tabBarIcon: (props) => (
             <MaterialCommunityIcons name="chart-bell-curve" {...props} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: (props) => (
+            <MaterialCommunityIcons name="cog-outline" {...props} />
           ),
         }}
       />

@@ -38,6 +38,9 @@ const TracksList = ({ header }) => {
         />
       )}
       ListHeaderComponent={header}
+      contentContainerStyle={{
+        paddingBottom: 80,
+      }}
     />
   );
 };

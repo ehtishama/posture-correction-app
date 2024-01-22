@@ -20,7 +20,7 @@ const BottomTabItem = ({
       onPress={onPress}
       onLongPress={onLongPress}
     >
-      {tabBarIcon({ size: 28, focused: isFocused })}
+      {tabBarIcon && tabBarIcon({ size: 28, focused: isFocused })}
       {isFocused && <View style={styles.activeDot}></View>}
     </TouchableOpacity>
   );
