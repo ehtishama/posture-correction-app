@@ -4,7 +4,7 @@ import React from "react";
 import { Link, useNavigation } from "expo-router";
 
 export const TrackItem = ({
-  item,
+  trackId,
   title,
   numExercises,
   duration,
@@ -13,7 +13,13 @@ export const TrackItem = ({
   const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => navigation.navigate("session_screen")}>
+    <Pressable
+      onPress={() =>
+        navigation.navigate("session_screen", {
+          trackId,
+        })
+      }
+    >
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>

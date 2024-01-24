@@ -4,15 +4,21 @@ import { colors } from "./styles/colors";
 import typography from "./styles/typography";
 import ExerciseItem from "./components/exerciseItem";
 import Button from "./components/button";
-import { useNavigation } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { getTrackById } from "./data/tracks";
+import { FlatList } from "react-native-gesture-handler";
 
 const SessionScreen = () => {
   const navigation = useNavigation();
+  const { trackId } = useLocalSearchParams();
+
+  const track = getTrackById(trackId);
+  const exercises = track.exercises;
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={typography.titleLarge}>Basic</Text>
+        <Text style={typography.titleLarge}>{track.title}</Text>
         <Text style={[typography.bodyMedium, styles.headerBodyText]}>
           Start lighty with these basic exercises and change difficulty as you
           go.
@@ -20,7 +26,14 @@ const SessionScreen = () => {
       </View>
 
       {/* exercises list */}
-      <ExerciseItem />
+
+      <FlatList
+        data={exercises}
+        renderItem={({ item }) => (
+          <ExerciseItem key={item.exercise_id} {...item} />
+        )}
+      />
+
       <View style={styles.startButton}>
         <Button
           primary
