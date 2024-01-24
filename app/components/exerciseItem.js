@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 16,
     borderBottomWidth: 2,
-    borderTopWidth: 2,
+    borderColor: "#ccc",
+    // borderTopWidth: 2,
     backgroundColor: "white",
   },
   image: {

@@ -21,7 +21,7 @@ const exercises = [
     description: "",
     demo_poses: [
       require("../../assets/exercises/curl/pose_1.svg"),
-      require("../../assets/exercises/curl/pose_1.svg"),
+      require("../../assets/exercises/curl/pose_2.svg"),
     ],
   },
   {
@@ -35,6 +35,12 @@ const exercises = [
     title: "Forearm Plank",
     description: "",
     demo_poses: [require("../../assets/exercises/forearm-plank/pose_1.svg")],
+  },
+  {
+    id: 6,
+    title: "Side Plank",
+    description: "",
+    demo_poses: [require("../../assets/exercises/side-plank/pose_1.svg")],
   },
 ];
 

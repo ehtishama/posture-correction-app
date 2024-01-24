@@ -25,8 +25,6 @@ const SessionScreen = () => {
         </Text>
       </View>
 
-      {/* exercises list */}
-
       <FlatList
         data={exercises}
         renderItem={({ item }) => (
@@ -38,7 +36,11 @@ const SessionScreen = () => {
         <Button
           primary
           text="Start"
-          onPress={() => navigation.navigate("exercise_screen")}
+          onPress={() =>
+            navigation.navigate("exercise_screen", {
+              exercises,
+            })
+          }
         />
       </View>
     </View>
@@ -57,6 +59,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: colors.primary_10,
     padding: 16,
+    elevation: 4,
+    borderBottomWidth: 1,
+    borderColor: "#ccc",
   },
   headerBodyText: {
     width: "80%",

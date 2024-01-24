@@ -31,6 +31,24 @@ const tracks = [
     ],
     thumbnail: require("../../assets/basic-plan.jpg"),
   },
+
+  {
+    id: 2,
+    title: "Intermediate",
+    exercises: [
+      {
+        exercise_id: 1,
+        duration: 8,
+        repeatitions: 3,
+      },
+      {
+        exercise_id: 6,
+        duration: 8,
+        repeatitions: 8,
+      },
+    ],
+    thumbnail: require("../../assets/intermediate-plan.jpg"),
+  },
 ];
 
 export const getTrackById = (trackId) => {

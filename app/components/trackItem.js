@@ -25,8 +25,8 @@ export const TrackItem = ({
           <Text style={styles.title}>{title}</Text>
           <View style={styles.desc}>
             <Text>{numExercises} exercises </Text>
-            <Entypo name="dot-single" size={16} color="black" />
-            <Text>{duration / 60} mins</Text>
+            {/* <Entypo name="dot-single" size={16} color="black" /> */}
+            {/* <Text>{duration} mins</Text> */}
           </View>
         </View>
         <Image style={styles.cardImage} source={thumbnail} />
