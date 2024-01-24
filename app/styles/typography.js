@@ -21,6 +21,11 @@ export default StyleSheet.create({
     fontSize: 32,
     lineHeight: 40,
   },
+  title2XLarge: {
+    fontWeight: "700",
+    fontSize: 40,
+    lineHeight: 40,
+  },
   bodyBase: {
     fontSize: 16,
     lineHeight: 24,

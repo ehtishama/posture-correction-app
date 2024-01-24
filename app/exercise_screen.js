@@ -1,29 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExerciseDemoCard } from "./components/exerciseDemoCard";
 import typography from "./styles/typography";
 import Button from "./components/button";
 import { useLocalSearchParams } from "expo-router";
 import { getExerciseById } from "./data/exercises";
+import Countdown from "./components/countdown";
 
 const ExerciseScreen = () => {
   const { exercises } = useLocalSearchParams();
   const [exerciseIdx, setExerciseIdx] = useState(0);
-
   const { exercise_id, duration, repetitions } = exercises[exerciseIdx];
-  const current_exercise = getExerciseById(exercise_id);
 
-  {
-    /**
-     * exercises
-     * current_exercise
-     * timer
-     * upon timer completion => current_exercise = next_exercise
-     *
-     * if there's no next exercises
-     * popup sessions done
-     */
-  }
+  const current_exercise = getExerciseById(exercise_id);
 
   const next_exercise = () => {
     if (exerciseIdx + 1 < exercises.length)
@@ -40,7 +29,11 @@ const ExerciseScreen = () => {
 
       <View style={styles.content}>
         <Text style={typography.titleBase}>{current_exercise.title}</Text>
-        <Text style={typography.titleXLarge}>{duration}</Text>
+        <Countdown
+          duration={duration}
+          onDone={next_exercise}
+          reset={current_exercise}
+        />
       </View>
 
       <View style={styles.actions}>

@@ -10,7 +10,7 @@ const tracks = [
       },
       {
         exercise_id: 2,
-        duration: 8,
+        duration: 10,
         repeatitions: 3,
       },
       {
