@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import typography from "../styles/typography";
 import { colors } from "../styles/colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 const Button = ({ onPress, primary, text = "button" }) => {
   return (

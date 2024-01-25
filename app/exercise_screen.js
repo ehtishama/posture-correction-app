@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Modal, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ExerciseDemoCard } from "./components/exerciseDemoCard";
 import typography from "./styles/typography";
@@ -10,6 +10,9 @@ import Countdown from "./components/countdown";
 const ExerciseScreen = () => {
   const { exercises } = useLocalSearchParams();
   const [exerciseIdx, setExerciseIdx] = useState(0);
+  const [showBreakModal, setShowBreakModel] = useState(false);
+  const [isPause, setIsPause] = useState(false);
+
   const { exercise_id, duration, repetitions } = exercises[exerciseIdx];
 
   const current_exercise = getExerciseById(exercise_id);
@@ -31,16 +34,41 @@ const ExerciseScreen = () => {
         <Text style={typography.titleBase}>{current_exercise.title}</Text>
         <Countdown
           duration={duration}
-          onDone={next_exercise}
+          onDone={() => setShowBreakModel(true)}
           reset={current_exercise}
+          isPlaying={!isPause}
         />
       </View>
 
       <View style={styles.actions}>
         <Button text="back" onPress={prev_exercise} />
-        <Button text="pause" primary />
+        <Button
+          text={isPause ? "start" : "pause"}
+          primary
+          onPress={() => setIsPause((x) => !x)}
+        />
         <Button text="next" onPress={next_exercise} />
       </View>
+
+      {showBreakModal && (
+        <Modal visible={true}>
+          <Text>Rest modal</Text>
+          <Countdown
+            duration={10}
+            onDone={() => {
+              setShowBreakModel(false);
+              next_exercise();
+            }}
+          />
+          <Button
+            onPress={() => {
+              setShowBreakModel(false);
+              next_exercise();
+            }}
+            text="Skip"
+          />
+        </Modal>
+      )}
     </View>
   );
 };

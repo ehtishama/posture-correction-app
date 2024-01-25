@@ -5,12 +5,12 @@ const tracks = [
     exercises: [
       {
         exercise_id: 1,
-        duration: 8,
+        duration: 2,
         repeatitions: 3,
       },
       {
         exercise_id: 2,
-        duration: 10,
+        duration: 3,
         repeatitions: 3,
       },
       {
