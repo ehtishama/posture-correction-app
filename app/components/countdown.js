@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import typography from "../styles/typography";
 import { colors } from "../styles/colors";
+import * as Progress from "react-native-progress";
 
 const Countdown = ({ duration, onDone, reset, isPlaying = true }) => {
   const [timeElapsed, setTimeElapsed] = useState(0);
@@ -35,7 +36,18 @@ const Countdown = ({ duration, onDone, reset, isPlaying = true }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={typography.title2XLarge}>{duration - timeElapsed}</Text>
+      <Progress.Circle
+        progress={1 - (timeElapsed / duration)}
+        color={colors.primary_30}
+        borderColor={colors.primary_1}
+        size={180}
+        borderWidth={8}
+        thickness={8}
+        showsText
+        strokeCap="round"
+        formatText={(progress) => duration - timeElapsed}
+        textStyle={typography.titleXLarge}
+      />
     </View>
   );
 };
@@ -43,7 +55,5 @@ const Countdown = ({ duration, onDone, reset, isPlaying = true }) => {
 export default Countdown;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.primary_1,
-  },
+  container: {},
 });

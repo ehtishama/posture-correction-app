@@ -26,6 +26,13 @@ export default function Page() {
           headerShown: true,
         }}
       />
+
+      <Stack.Screen
+        name="session_complete_screen"
+        options={{
+          headerShown: true,
+        }}
+      />
     </Stack>
   );
 }

@@ -3,15 +3,18 @@ import React, { useEffect, useState } from "react";
 import { ExerciseDemoCard } from "./components/exerciseDemoCard";
 import typography from "./styles/typography";
 import Button from "./components/button";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import { getExerciseById } from "./data/exercises";
 import Countdown from "./components/countdown";
+import TakeRestModal from "./components/takeRestModal";
 
 const ExerciseScreen = () => {
+  const navigation = useNavigation();
+
   const { exercises } = useLocalSearchParams();
   const [exerciseIdx, setExerciseIdx] = useState(0);
   const [showBreakModal, setShowBreakModel] = useState(false);
-  const [isPause, setIsPause] = useState(false);
+  const [isPause, setIsPause] = useState(true);
 
   const { exercise_id, duration, repetitions } = exercises[exerciseIdx];
 
@@ -20,6 +23,7 @@ const ExerciseScreen = () => {
   const next_exercise = () => {
     if (exerciseIdx + 1 < exercises.length)
       setExerciseIdx((exerciseIdx) => exerciseIdx + 1);
+    else navigation.replace("session_complete_screen");
   };
 
   const prev_exercise = () => {
@@ -31,7 +35,7 @@ const ExerciseScreen = () => {
       <ExerciseDemoCard poses={current_exercise.demo_poses} />
 
       <View style={styles.content}>
-        <Text style={typography.titleBase}>{current_exercise.title}</Text>
+        <Text style={typography.titleMedium}>{current_exercise.title}</Text>
         <Countdown
           duration={duration}
           onDone={() => setShowBreakModel(true)}
@@ -51,23 +55,12 @@ const ExerciseScreen = () => {
       </View>
 
       {showBreakModal && (
-        <Modal visible={true}>
-          <Text>Rest modal</Text>
-          <Countdown
-            duration={10}
-            onDone={() => {
-              setShowBreakModel(false);
-              next_exercise();
-            }}
-          />
-          <Button
-            onPress={() => {
-              setShowBreakModel(false);
-              next_exercise();
-            }}
-            text="Skip"
-          />
-        </Modal>
+        <TakeRestModal
+          onRestComplete={() => {
+            setShowBreakModel(false);
+            next_exercise();
+          }}
+        />
       )}
     </View>
   );
@@ -84,7 +77,7 @@ const styles = StyleSheet.create({
   content: {
     alignItems: "center",
     padding: 16,
-    // marginTop: "auto",
+    gap: 12,
   },
   actions: {
     // marginTop: "auto",
