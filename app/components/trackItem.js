@@ -2,6 +2,7 @@ import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import React from "react";
 import { Link, useNavigation } from "expo-router";
+import { colors } from "../styles/colors";
 
 export const TrackItem = ({
   trackId,
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderWidth: 2,
-    borderColor: "black",
     borderRadius: 12,
     overflow: "hidden",
     borderBottomWidth: 8,

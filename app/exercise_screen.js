@@ -7,6 +7,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { getExerciseById } from "./data/exercises";
 import Countdown from "./components/countdown";
 import TakeRestModal from "./components/takeRestModal";
+import { Feather } from "@expo/vector-icons";
 
 const ExerciseScreen = () => {
   const navigation = useNavigation();
@@ -39,19 +40,27 @@ const ExerciseScreen = () => {
         <Countdown
           duration={duration}
           onDone={() => setShowBreakModel(true)}
-          reset={current_exercise}
+          reset={current_exercise} // 🔴 TODO :: reset the countdown when the current exercise changes... (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
           isPlaying={!isPause}
         />
       </View>
 
       <View style={styles.actions}>
-        <Button text="back" onPress={prev_exercise} />
-        <Button
-          text={isPause ? "start" : "pause"}
-          primary
-          onPress={() => setIsPause((x) => !x)}
-        />
-        <Button text="next" onPress={next_exercise} />
+        <Button onPress={prev_exercise}>
+          <Feather name="arrow-left" size={24} color="black" />
+        </Button>
+
+        <Button primary onPress={() => setIsPause((x) => !x)}>
+          {isPause ? (
+            <Feather name="play" size={24} color="black" />
+          ) : (
+            <Feather name="pause" size={24} color="black" />
+          )}
+        </Button>
+
+        <Button onPress={next_exercise}>
+          <Feather name="arrow-right" size={24} color="black" />
+        </Button>
       </View>
 
       {showBreakModal && (

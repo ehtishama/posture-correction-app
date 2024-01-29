@@ -30,6 +30,9 @@ const SessionScreen = () => {
         renderItem={({ item }) => (
           <ExerciseItem key={item.exercise_id} {...item} />
         )}
+        contentContainerStyle={{
+          paddingBottom: 96,
+        }}
       />
 
       <View style={styles.startButton}>

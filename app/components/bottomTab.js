@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     bottom: 0,
     left: 0,
-    right: 0,    
+    right: 0,
   },
   container: {
     flexDirection: "row",
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     backgroundColor: colors.primary_20,
     justifyContent: "space-around",
-    elevation: 2
+    elevation: 2,
   },
 });

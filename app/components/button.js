@@ -4,11 +4,12 @@ import typography from "../styles/typography";
 import { colors } from "../styles/colors";
 import { TouchableOpacity } from "react-native";
 
-const Button = ({ onPress, primary, text = "button" }) => {
+const Button = ({ onPress, primary, text = "", children }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, primary && styles.primary]}>
-        <Text style={typography.titleMedium}>{text}</Text>
+        {text && <Text style={typography.titleMedium}>{text}</Text>}
+        {children}
       </View>
     </TouchableOpacity>
   );
