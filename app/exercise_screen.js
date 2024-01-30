@@ -9,6 +9,8 @@ import Countdown from "./components/countdown";
 import TakeRestModal from "./components/takeRestModal";
 import { Feather } from "@expo/vector-icons";
 
+import * as Speech from "expo-speech";
+
 const ExerciseScreen = () => {
   const navigation = useNavigation();
 
@@ -31,6 +33,15 @@ const ExerciseScreen = () => {
     if (exerciseIdx > 0) setExerciseIdx((exerciseIdx) => exerciseIdx - 1);
   };
 
+  const preExerciseMessage = (onDone = () => {}) => {
+    Speech.speak(
+      "Get ready for your next exercise. The countdown will start now.",
+      {
+        onDone,
+      }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <ExerciseDemoCard poses={current_exercise.demo_poses} />
@@ -40,7 +51,8 @@ const ExerciseScreen = () => {
         <Countdown
           duration={duration}
           onDone={() => setShowBreakModel(true)}
-          reset={current_exercise} // 🔴 TODO :: reset the countdown when the current exercise changes... (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
+          // 🔴 TODO :: reset the countdown when the current exercise changes... (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
+          reset={current_exercise}
           isPlaying={!isPause}
         />
       </View>
@@ -67,7 +79,8 @@ const ExerciseScreen = () => {
         <TakeRestModal
           onRestComplete={() => {
             setShowBreakModel(false);
-            next_exercise();
+
+            preExerciseMessage(next_exercise);
           }}
         />
       )}
