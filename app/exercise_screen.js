@@ -8,11 +8,10 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import Countdown from "./components/countdown";
 import TakeRestModal from "./components/takeRestModal";
 import { Feather } from "@expo/vector-icons";
-
 import * as Speech from "expo-speech";
 import { getExerciseById } from "./data/utils";
 
-const ExerciseScreen = () => {
+export default function ExerciseScreen() {
   const navigation = useNavigation();
 
   const { exercises } = useLocalSearchParams();
@@ -22,6 +21,10 @@ const ExerciseScreen = () => {
 
   const { exercise_id, duration, repetitions } = exercises[currExerciseIdx];
   const current_exercise = getExerciseById(exercise_id);
+
+  const start_exercise = () => {
+    preExerciseMessage(() => setIsPause(false), true);
+  };
 
   const next_exercise = () => {
     if (currExerciseIdx + 1 < exercises.length)
@@ -34,16 +37,22 @@ const ExerciseScreen = () => {
       setCurrExerciseIdx((exerciseIdx) => exerciseIdx - 1);
   };
 
-  const preExerciseMessage = (onDone = () => {}) => {
-    Speech.speak(
-      "Get ready for your next exercise. The countdown will start now.",
-      {
-        onDone,
-      }
-    );
+  const preExerciseMessage = (onDone, isFirstExercise = false) => {
+    let message;
+    if (!isFirstExercise)
+      message =
+        "Get ready for your next exercise. The countdown will start now.";
+    else
+      message =
+        "Get ready for your first exercise. The countdown will start now";
+    Speech.speak(message, {
+      onDone,
+    });
   };
 
-  // useEffect
+  useEffect(() => {
+    start_exercise();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -54,7 +63,8 @@ const ExerciseScreen = () => {
         <Countdown
           duration={duration}
           onDone={() => setIsRestModalVisible(true)}
-          // 🔴 TODO :: reset the countdown when the current exercise changes... (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
+          // 🔴 TODO :: reset the countdown when the current exercise changes...
+          // (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
           reset={current_exercise}
           isPlaying={!isPause}
         />
@@ -82,16 +92,15 @@ const ExerciseScreen = () => {
         <TakeRestModal
           onRestComplete={() => {
             setIsRestModalVisible(false);
-
-            preExerciseMessage(next_exercise);
+            setIsPause(true);
+            next_exercise();
+            preExerciseMessage(() => setIsPause(false));
           }}
         />
       )}
     </View>
   );
-};
-
-export default ExerciseScreen;
+}
 
 const styles = StyleSheet.create({
   container: {
