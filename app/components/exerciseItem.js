@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import typography from "../styles/typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { getExerciseById } from "../data/exercises";
+import { getExerciseById } from "../data/utils";
 
 const ExerciseItem = ({ exercise_id, duration, repetitions }) => {
   const exercise = getExerciseById(exercise_id);
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     gap: 16,
     borderBottomWidth: 1,
     borderColor: "#ccc",
-    // borderTopWidth: 2,
     backgroundColor: "white",
   },
   image: {

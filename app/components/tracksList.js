@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { TrackItem } from "./trackItem";
-import tracks from "../data/tracks";
+import { tracks } from "../data";
 
 const TracksList = ({ header }) => {
   return (

@@ -4,33 +4,34 @@ import { ExerciseDemoCard } from "./components/exerciseDemoCard";
 import typography from "./styles/typography";
 import Button from "./components/button";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { getExerciseById } from "./data/exercises";
+
 import Countdown from "./components/countdown";
 import TakeRestModal from "./components/takeRestModal";
 import { Feather } from "@expo/vector-icons";
 
 import * as Speech from "expo-speech";
+import { getExerciseById } from "./data/utils";
 
 const ExerciseScreen = () => {
   const navigation = useNavigation();
 
   const { exercises } = useLocalSearchParams();
-  const [exerciseIdx, setExerciseIdx] = useState(0);
-  const [showBreakModal, setShowBreakModel] = useState(false);
+  const [currExerciseIdx, setCurrExerciseIdx] = useState(0);
+  const [isRestModalVisible, setIsRestModalVisible] = useState(false);
   const [isPause, setIsPause] = useState(true);
 
-  const { exercise_id, duration, repetitions } = exercises[exerciseIdx];
-
+  const { exercise_id, duration, repetitions } = exercises[currExerciseIdx];
   const current_exercise = getExerciseById(exercise_id);
 
   const next_exercise = () => {
-    if (exerciseIdx + 1 < exercises.length)
-      setExerciseIdx((exerciseIdx) => exerciseIdx + 1);
+    if (currExerciseIdx + 1 < exercises.length)
+      setCurrExerciseIdx((exerciseIdx) => exerciseIdx + 1);
     else navigation.replace("session_complete_screen");
   };
 
   const prev_exercise = () => {
-    if (exerciseIdx > 0) setExerciseIdx((exerciseIdx) => exerciseIdx - 1);
+    if (currExerciseIdx > 0)
+      setCurrExerciseIdx((exerciseIdx) => exerciseIdx - 1);
   };
 
   const preExerciseMessage = (onDone = () => {}) => {
@@ -42,6 +43,8 @@ const ExerciseScreen = () => {
     );
   };
 
+  // useEffect
+
   return (
     <View style={styles.container}>
       <ExerciseDemoCard poses={current_exercise.demo_poses} />
@@ -50,7 +53,7 @@ const ExerciseScreen = () => {
         <Text style={typography.titleMedium}>{current_exercise.title}</Text>
         <Countdown
           duration={duration}
-          onDone={() => setShowBreakModel(true)}
+          onDone={() => setIsRestModalVisible(true)}
           // 🔴 TODO :: reset the countdown when the current exercise changes... (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
           reset={current_exercise}
           isPlaying={!isPause}
@@ -75,10 +78,10 @@ const ExerciseScreen = () => {
         </Button>
       </View>
 
-      {showBreakModal && (
+      {isRestModalVisible && (
         <TakeRestModal
           onRestComplete={() => {
-            setShowBreakModel(false);
+            setIsRestModalVisible(false);
 
             preExerciseMessage(next_exercise);
           }}
