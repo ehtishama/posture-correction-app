@@ -9,6 +9,7 @@ import { FlatList } from "react-native";
 import { getTrackById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/StackNavigator";
+import ScreenLayout from "./screen_layout";
 
 const SessionScreen = () => {
   const navigation = useNavigation();
@@ -20,7 +21,7 @@ const SessionScreen = () => {
   const exercises = track.exercises;
 
   return (
-    <View style={styles.container}>
+    <ScreenLayout>
       <View style={styles.header}>
         <Text style={typography.titleLarge}>{track.title}</Text>
         <Text style={[typography.bodyMedium, styles.headerBodyText]}>
@@ -50,7 +51,7 @@ const SessionScreen = () => {
           }
         />
       </View>
-    </View>
+    </ScreenLayout>
   );
 };
 

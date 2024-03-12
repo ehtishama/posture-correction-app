@@ -10,6 +10,7 @@ import { Feather } from "@expo/vector-icons";
 import * as Speech from "expo-speech";
 import { getExerciseById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import ScreenLayout from "./screen_layout";
 
 export default function ExerciseScreen() {
   const navigation = useNavigation();
@@ -58,7 +59,7 @@ export default function ExerciseScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScreenLayout style={styles.container}>
       <ExerciseDemoCard poses={current_exercise.demo_poses} />
 
       <View style={styles.content}>
@@ -101,7 +102,7 @@ export default function ExerciseScreen() {
           }}
         />
       )}
-    </View>
+    </ScreenLayout>
   );
 }
 

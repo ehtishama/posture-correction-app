@@ -2,7 +2,6 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import typography from "../styles/typography";
-import { colors } from "../styles/colors";
 
 export const Header = () => {
   return (
