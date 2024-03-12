@@ -1,4 +1,4 @@
-export default data = {
+export const data = {
   exercises: [
     {
       id: 1,
@@ -98,4 +98,5 @@ export default data = {
   ],
 };
 
-export const { exercises, tracks } = data;
+export const exercises = data.exercises;
+export const tracks = data.tracks;
