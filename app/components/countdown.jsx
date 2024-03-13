@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import typography from "../styles/typography";
 import { colors } from "../styles/colors";
@@ -6,14 +6,21 @@ import * as Progress from "react-native-progress";
 import { Audio } from "expo-av";
 
 const ticSound = require("../../assets/sounds/tic.wav");
+const COUNTDOWN_DELAY = 1000;
 
-const Countdown = ({ duration, onDone, reset, isPlaying = true }) => {
+async function playTicSound() {
+  const { sound } = await Audio.Sound.createAsync(ticSound);
+  await sound.playAsync();
+}
+
+const Countdown = ({
+  duration,
+  onCompleted,
+  reset,
+  running = true,
+  sound = true,
+}) => {
   const [timeElapsed, setTimeElapsed] = useState(0);
-
-  async function playTicSound() {
-    const { sound } = await Audio.Sound.createAsync(ticSound);
-    await sound.playAsync();
-  }
 
   // reset timer
   useEffect(() => {
@@ -21,32 +28,27 @@ const Countdown = ({ duration, onDone, reset, isPlaying = true }) => {
   }, [reset, setTimeElapsed]);
 
   useEffect(() => {
-    if (timeElapsed >= duration) return;
+    if (!running) return;
+    if (timeElapsed >= duration) {
+      onCompleted && onCompleted();
+      return;
+    }
 
-    const intervalId = setInterval(() => {
-      if (!isPlaying) {
-        clearInterval(intervalId);
-        return;
-      }
+    const tick = () => {
+      setTimeElapsed((timeElapsed) => timeElapsed + 1);
+      if (sound) playTicSound();
+    };
 
-      setTimeElapsed((timeElapsed) => {
-        if (timeElapsed + 1 >= duration) {
-          clearInterval(intervalId);
-          onDone && onDone();
-        }
-        playTicSound();
-        return timeElapsed + 1;
-      });
-    }, 1000);
+    const intervalId = setInterval(tick, COUNTDOWN_DELAY);
 
     // clean up
     return () => clearInterval(intervalId);
-  }, [timeElapsed, setTimeElapsed, duration, onDone, isPlaying]);
+  }, [timeElapsed, setTimeElapsed, duration, onCompleted, running]);
 
   return (
     <View style={styles.container}>
       <Progress.Circle
-        progress={1 - timeElapsed / duration}
+        progress={1 - (timeElapsed / duration).toFixed(2)}
         color={colors.primary_30}
         borderColor={colors.primary_1}
         size={180}
@@ -54,7 +56,7 @@ const Countdown = ({ duration, onDone, reset, isPlaying = true }) => {
         thickness={8}
         showsText
         strokeCap="round"
-        formatText={(progress) => duration - timeElapsed}
+        formatText={() => duration - timeElapsed}
         textStyle={typography.titleXLarge}
       />
     </View>

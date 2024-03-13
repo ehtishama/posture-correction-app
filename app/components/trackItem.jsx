@@ -1,8 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { STACK_ROUTES } from "../navigation/StackNavigator";
-
+import { STACK_ROUTES } from "../navigation/Routes";
 
 export const TrackItem = ({
   trackId,

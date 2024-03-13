@@ -39,8 +39,8 @@ const TakeRestModal = ({ onRestComplete }) => {
         </View>
         <Countdown
           duration={10}
-          onDone={onRestComplete}
-          isPlaying={countdownRunning}
+          onCompleted={onRestComplete}
+          running={countdownRunning}
         />
         <Button onPress={onRestComplete} text="Skip Rest" />
       </View>

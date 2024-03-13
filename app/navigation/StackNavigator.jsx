@@ -4,15 +4,9 @@ import SessionScreen from "../screens/session_screen";
 import SessionCompleteScreen from "../screens/session_complete_screen";
 import TabNavigator from "./TabNavigator";
 import ExerciseScreen from "../screens/exercise_screen";
+import { STACK_ROUTES } from "./Routes";
 
 const Stack = createStackNavigator();
-
-export const STACK_ROUTES = {
-  TAB_NAVIGATOR: "TabNavigator",
-  EXERCISE_SCREEN: "ExerciseScreen",
-  SESSION_SCREEN: "SessionScreen",
-  SESSION_COMPLETE_SCREEN: "SessionCompleteScreen",
-};
 
 export default function StackNavigator() {
   return (

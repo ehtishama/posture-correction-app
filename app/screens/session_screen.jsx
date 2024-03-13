@@ -8,7 +8,7 @@ import Button from "../components/button";
 import { FlatList } from "react-native";
 import { getTrackById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { STACK_ROUTES } from "../navigation/StackNavigator";
+import { STACK_ROUTES } from "../navigation/Routes";
 import ScreenLayout from "./screen_layout";
 
 const SessionScreen = () => {

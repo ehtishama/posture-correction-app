@@ -31,7 +31,9 @@ export const ExerciseDemoCard = ({ poses }) => {
       {/* sound switch */}
 
       <View style={styles.actionBtns}>
-        <TouchableOpacity onPress={() => setSoundEnabled((val) => !val)}>
+        <TouchableOpacity
+          onPress={() => setSoundEnabled((enabled) => !enabled)}
+        >
           {soundEnabled ? (
             <MaterialCommunityIcons
               name="volume-high"

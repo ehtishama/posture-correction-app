@@ -11,6 +11,19 @@ import * as Speech from "expo-speech";
 import { getExerciseById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import ScreenLayout from "./screen_layout";
+import { STACK_ROUTES } from "../navigation/Routes";
+
+const preExerciseMessage = (onDone, isFirstExercise = false) => {
+  let message;
+  if (!isFirstExercise)
+    message = "Get ready for your next exercise. The countdown will start now.";
+  else
+    message = "Get ready for your first exercise. The countdown will start now";
+
+  Speech.speak(message, {
+    onDone,
+  });
+};
 
 export default function ExerciseScreen() {
   const navigation = useNavigation();
@@ -23,35 +36,22 @@ export default function ExerciseScreen() {
   const [isRestModalVisible, setIsRestModalVisible] = useState(false);
   const [isPause, setIsPause] = useState(true);
 
-  const { exercise_id, duration, repetitions } = exercises[currExerciseIdx];
-  const current_exercise = getExerciseById(exercise_id);
+  const { exercise_id, duration } = exercises[currExerciseIdx];
+  const currExerciseModel = getExerciseById(exercise_id);
 
   const start_exercise = () => {
     preExerciseMessage(() => setIsPause(false), true);
   };
 
-  const next_exercise = () => {
+  const nextExercise = () => {
     if (currExerciseIdx + 1 < exercises.length)
       setCurrExerciseIdx((exerciseIdx) => exerciseIdx + 1);
-    else navigation.replace("session_complete_screen");
+    else navigation.replace(STACK_ROUTES.SESSION_COMPLETE_SCREEN);
   };
 
-  const prev_exercise = () => {
+  const prevExercise = () => {
     if (currExerciseIdx > 0)
       setCurrExerciseIdx((exerciseIdx) => exerciseIdx - 1);
-  };
-
-  const preExerciseMessage = (onDone, isFirstExercise = false) => {
-    let message;
-    if (!isFirstExercise)
-      message =
-        "Get ready for your next exercise. The countdown will start now.";
-    else
-      message =
-        "Get ready for your first exercise. The countdown will start now";
-    Speech.speak(message, {
-      onDone,
-    });
   };
 
   useEffect(() => {
@@ -60,22 +60,22 @@ export default function ExerciseScreen() {
 
   return (
     <ScreenLayout style={styles.container}>
-      <ExerciseDemoCard poses={current_exercise.demo_poses} />
+      <ExerciseDemoCard poses={currExerciseModel.demo_poses} />
 
       <View style={styles.content}>
-        <Text style={typography.titleMedium}>{current_exercise.title}</Text>
+        <Text style={typography.titleMedium}>{currExerciseModel.title}</Text>
         <Countdown
           duration={duration}
-          onDone={() => setIsRestModalVisible(true)}
-          // 🔴 TODO :: reset the countdown when the current exercise changes...
-          // (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
-          reset={current_exercise}
-          isPlaying={!isPause}
+          onCompleted={() => setIsRestModalVisible(true)}
+          // reset the countdown when the current exercise changes
+          // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
+          reset={currExerciseModel}
+          running={!isPause}
         />
       </View>
 
       <View style={styles.actions}>
-        <Button onPress={prev_exercise}>
+        <Button onPress={prevExercise}>
           <Feather name="arrow-left" size={24} color="black" />
         </Button>
 
@@ -87,7 +87,7 @@ export default function ExerciseScreen() {
           )}
         </Button>
 
-        <Button onPress={next_exercise}>
+        <Button onPress={nextExercise}>
           <Feather name="arrow-right" size={24} color="black" />
         </Button>
       </View>
@@ -97,7 +97,7 @@ export default function ExerciseScreen() {
           onRestComplete={() => {
             setIsRestModalVisible(false);
             setIsPause(true);
-            next_exercise();
+            nextExercise();
             preExerciseMessage(() => setIsPause(false));
           }}
         />
