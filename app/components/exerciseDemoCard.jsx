@@ -4,7 +4,7 @@ import { colors } from "../styles/colors";
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export const ExerciseDemoCard = ({ poses }) => {
+export const ExerciseDemoCard = ({ poses, onSilentModeChange }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [poseIdx, setPoseIdx] = useState(0);
   let pose = poses[poseIdx];
@@ -17,6 +17,10 @@ export const ExerciseDemoCard = ({ poses }) => {
 
     return () => clearInterval(timerId);
   }, [poseIdx, poses]);
+
+  useEffect(() => {
+    onSilentModeChange(!soundEnabled);
+  }, [soundEnabled]);
 
   return (
     <View style={styles.container}>

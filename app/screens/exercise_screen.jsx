@@ -13,13 +13,14 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import ScreenLayout from "./screen_layout";
 import { STACK_ROUTES } from "../navigation/Routes";
 
-const preExerciseMessage = (onDone, isFirstExercise = false) => {
+const playExerciseMessage = (onDone, isFirstExercise = false) => {
   let message;
   if (!isFirstExercise)
     message = "Get ready for your next exercise. The countdown will start now.";
   else
     message = "Get ready for your first exercise. The countdown will start now";
 
+  Speech.stop();
   Speech.speak(message, {
     onDone,
   });
@@ -35,18 +36,24 @@ export default function ExerciseScreen() {
   const [currExerciseIdx, setCurrExerciseIdx] = useState(0);
   const [isRestModalVisible, setIsRestModalVisible] = useState(false);
   const [isPause, setIsPause] = useState(true);
+  const [isSilent, setIsSilent] = useState(false);
 
   const { exercise_id, duration } = exercises[currExerciseIdx];
   const currExerciseModel = getExerciseById(exercise_id);
 
-  const start_exercise = () => {
-    preExerciseMessage(() => setIsPause(false), true);
+  const handleSilentMode = (isSilent) => {
+    Speech.stop();
+    setIsSilent(isSilent);
+  };
+
+  const startExercise = () => {
+    setIsPause(false);
   };
 
   const nextExercise = () => {
-    if (currExerciseIdx + 1 < exercises.length)
-      setCurrExerciseIdx((exerciseIdx) => exerciseIdx + 1);
-    else navigation.replace(STACK_ROUTES.SESSION_COMPLETE_SCREEN);
+    if (currExerciseIdx + 1 < exercises.length) {
+      setCurrExerciseIdx((idx) => idx + 1);
+    } else navigation.replace(STACK_ROUTES.SESSION_COMPLETE_SCREEN);
   };
 
   const prevExercise = () => {
@@ -55,12 +62,21 @@ export default function ExerciseScreen() {
   };
 
   useEffect(() => {
-    start_exercise();
+    if (isSilent) startExercise();
+    else playExerciseMessage(startExercise, true);
   }, []);
+
+  useEffect(() => {
+    if (isSilent) startExercise();
+    else playExerciseMessage(startExercise);
+  }, [currExerciseIdx]);
 
   return (
     <ScreenLayout style={styles.container}>
-      <ExerciseDemoCard poses={currExerciseModel.demo_poses} />
+      <ExerciseDemoCard
+        poses={currExerciseModel.demo_poses}
+        onSilentModeChange={handleSilentMode}
+      />
 
       <View style={styles.content}>
         <Text style={typography.titleMedium}>{currExerciseModel.title}</Text>
@@ -98,8 +114,8 @@ export default function ExerciseScreen() {
             setIsRestModalVisible(false);
             setIsPause(true);
             nextExercise();
-            preExerciseMessage(() => setIsPause(false));
           }}
+          isSilent={isSilent}
         />
       )}
     </ScreenLayout>

@@ -1,4 +1,11 @@
-import { Modal, StyleSheet, Text, View } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import Countdown from "./countdown";
 import Button from "./button";
@@ -7,28 +14,35 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../styles/colors";
 import * as Speech from "expo-speech";
 
-const TakeRestModal = ({ onRestComplete }) => {
+const TakeRestModal = ({ onRestComplete, isSilent }) => {
   const [countdownRunning, setCountdownRunning] = useState(false);
 
   useEffect(() => {
     if (countdownRunning) return;
 
-    Speech.speak(
-      "It's time to take some rest. The 10 seconds rest count down will start now.",
-      {
-        onDone: () => setCountdownRunning(true),
-      }
-    );
-  }, [setCountdownRunning]);
+    if (isSilent) {
+      Speech.stop();
+      setCountdownRunning(true);
+    } else {
+      Speech.speak(
+        "It's time to take some rest. The 10 seconds rest count down will start now.",
+        {
+          onDone: () => setCountdownRunning(true),
+        }
+      );
+    }
+  }, [countdownRunning]);
 
   return (
     <Modal visible={true}>
-      <MaterialCommunityIcons
-        name="close"
-        size={28}
-        color="black"
-        style={styles.closeButton}
-      />
+      <TouchableOpacity onPress={onRestComplete}>
+        <MaterialCommunityIcons
+          name="close"
+          size={28}
+          color="black"
+          style={styles.closeButton}
+        />
+      </TouchableOpacity>
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={typography.titleLarge}>Take Rest</Text>
