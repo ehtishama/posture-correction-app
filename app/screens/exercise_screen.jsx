@@ -12,6 +12,8 @@ import { getExerciseById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import ScreenLayout from "./screen_layout";
 import { STACK_ROUTES } from "../navigation/Routes";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../styles/colors";
 
 const playExerciseMessage = (onDone, isFirstExercise = false) => {
   let message;
@@ -25,6 +27,13 @@ const playExerciseMessage = (onDone, isFirstExercise = false) => {
     onDone,
   });
 };
+const instructions = [
+  "Start on all fours.",
+  "Arch your back while inhaling (Cow position). 🐄",
+  "Round your spine while exhaling (Cat position). 😺",
+  "Flow smoothly between Cat and Cow.",
+  "Move with your breath.",
+];
 
 export default function ExerciseScreen() {
   const navigation = useNavigation();
@@ -61,33 +70,49 @@ export default function ExerciseScreen() {
       setCurrExerciseIdx((exerciseIdx) => exerciseIdx - 1);
   };
 
+  // Starts the exercise countdown on navigations, and idx change
+  // If idx 0, play first exercise message
   useEffect(() => {
-    if (isSilent) startExercise();
-    else playExerciseMessage(startExercise, true);
-  }, []);
+    return; // temporarily disable auto start
 
-  useEffect(() => {
     if (isSilent) startExercise();
-    else playExerciseMessage(startExercise);
+    else playExerciseMessage(startExercise, currExerciseIdx == 0);
   }, [currExerciseIdx]);
 
   return (
     <ScreenLayout style={styles.container}>
       <ExerciseDemoCard
+        title={currExerciseModel.title}
         poses={currExerciseModel.demo_poses}
         onSilentModeChange={handleSilentMode}
       />
 
       <View style={styles.content}>
-        <Text style={typography.titleMedium}>{currExerciseModel.title}</Text>
-        <Countdown
-          duration={duration}
-          onCompleted={() => setIsRestModalVisible(true)}
-          // reset the countdown when the current exercise changes
-          // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
-          reset={currExerciseModel}
-          running={!isPause}
-        />
+        {instructions.map((item, idx) => (
+          <View
+            key={idx}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
+            <MaterialCommunityIcons
+              name={`numeric-${idx + 1}`}
+              size={28}
+              color={colors.primary_60}
+            />
+
+            <Text>{item}</Text>
+          </View>
+        ))}
+
+        <View style={{ alignSelf: "center" }}>
+          <Countdown
+            duration={duration}
+            onCompleted={() => setIsRestModalVisible(true)}
+            // reset the countdown when the current exercise changes
+            // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
+            reset={currExerciseModel}
+            running={!isPause}
+          />
+        </View>
       </View>
 
       <View style={styles.actions}>
@@ -129,9 +154,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   content: {
-    alignItems: "center",
+    // alignItems: "center",
     padding: 16,
     gap: 12,
+  },
+  title: {
+    textAlign: "center",
   },
   actions: {
     // marginTop: "auto",

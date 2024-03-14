@@ -3,8 +3,13 @@ import React, { useEffect, useState } from "react";
 import { colors } from "../styles/colors";
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import typography from "../styles/typography";
 
-export const ExerciseDemoCard = ({ poses, onSilentModeChange }) => {
+export const ExerciseDemoCard = ({
+  title = "Cat Cow",
+  poses,
+  onSilentModeChange,
+}) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [poseIdx, setPoseIdx] = useState(0);
   let pose = poses[poseIdx];
@@ -32,34 +37,37 @@ export const ExerciseDemoCard = ({ poses, onSilentModeChange }) => {
         />
       )}
 
-      {/* sound switch */}
+      <View style={styles.footer}>
+        <Text style={[typography.titleLarge, { color: colors.primary_70 }]}>
+          {title}
+        </Text>
+        <View style={styles.action_buttons}>
+          <TouchableOpacity
+            onPress={() => setSoundEnabled((enabled) => !enabled)}
+          >
+            {soundEnabled ? (
+              <MaterialCommunityIcons
+                name="volume-high"
+                size={28}
+                color={colors.primary_70}
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="volume-off"
+                size={28}
+                color={colors.primary_70}
+              />
+            )}
+          </TouchableOpacity>
 
-      <View style={styles.actionBtns}>
-        <TouchableOpacity
-          onPress={() => setSoundEnabled((enabled) => !enabled)}
-        >
-          {soundEnabled ? (
+          <TouchableOpacity>
             <MaterialCommunityIcons
-              name="volume-high"
+              name="information-outline"
               size={28}
               color={colors.primary_70}
             />
-          ) : (
-            <MaterialCommunityIcons
-              name="volume-off"
-              size={28}
-              color={colors.primary_70}
-            />
-          )}
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <MaterialCommunityIcons
-            name="information-outline"
-            size={28}
-            color={colors.primary_70}
-          />
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -75,13 +83,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
+    // position:
   },
   image: {},
-  actionBtns: {
+  footer: {
     position: "absolute",
+    flexGrow: 1,
     bottom: 16,
-    right: 16,
     gap: 20,
     flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 20,
+  },
+  action_buttons: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 12,
   },
 });

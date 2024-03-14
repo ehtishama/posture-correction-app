@@ -3,7 +3,14 @@ export const data = {
     {
       id: 1,
       title: "Cat Cow",
-      description: "",
+      description: "lorem",
+      instructions: [
+        "Start on all fours with your hands directly under your shoulders and knees under your hips.",
+        "Inhale as you arch your back, dropping your belly towards the floor, and lift your head and tailbone towards the ceiling (Cow position). 🐄",
+        "Exhale as you round your spine, tucking your chin to your chest and pulling your belly button towards your spine (Cat position). 😺",
+        "Repeat the movement, flowing smoothly between Cat and Cow positions.",
+        "Move with your breath, inhaling into Cow and exhaling into Cat, maintaining a fluid motion.",
+      ],
       demo_poses: [
         require("../../assets/exercises/cat-cows/pose_1.svg"),
         require("../../assets/exercises/cat-cows/pose_2.svg"),

@@ -18,17 +18,18 @@ const Countdown = ({
   onCompleted,
   reset,
   running = true,
-  sound = true,
+  sound = false,
 }) => {
   const [timeElapsed, setTimeElapsed] = useState(0);
 
   // reset timer
   useEffect(() => {
     setTimeElapsed(0);
-  }, [reset, setTimeElapsed]);
+  }, [reset]);
 
   useEffect(() => {
     if (!running) return;
+
     if (timeElapsed >= duration) {
       onCompleted && onCompleted();
       return;
@@ -43,7 +44,7 @@ const Countdown = ({
 
     // clean up
     return () => clearInterval(intervalId);
-  }, [timeElapsed, setTimeElapsed, duration, onCompleted, running]);
+  }, [timeElapsed, duration, onCompleted, running]);
 
   return (
     <View style={styles.container}>
