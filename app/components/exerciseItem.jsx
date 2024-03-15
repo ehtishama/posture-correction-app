@@ -7,11 +7,11 @@ import { getExerciseById } from "../data/utils";
 const ExerciseItem = ({ exercise_id, duration, repetitions }) => {
   const exercise = getExerciseById(exercise_id);
 
-  const Pose = exercise.demo_poses[0].default;
+  const Pose = exercise.demo_poses[0]?.default;
 
   return (
     <View style={styles.container}>
-      <Pose style={styles.image} height={70} width={70} />
+      {Pose && <Pose style={styles.image} height={70} width={70} />}
 
       <View style={styles.content}>
         <Text style={typography.titleMedium}>{exercise.title}</Text>

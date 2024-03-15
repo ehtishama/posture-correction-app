@@ -9,6 +9,7 @@ export const ExerciseDemoCard = ({
   title = "Cat Cow",
   poses,
   onSilentModeChange,
+  onInfoClick,
 }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [poseIdx, setPoseIdx] = useState(0);
@@ -60,7 +61,7 @@ export const ExerciseDemoCard = ({
             )}
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onInfoClick}>
             <MaterialCommunityIcons
               name="information-outline"
               size={28}

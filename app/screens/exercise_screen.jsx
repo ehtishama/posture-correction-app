@@ -14,6 +14,11 @@ import ScreenLayout from "./screen_layout";
 import { STACK_ROUTES } from "../navigation/Routes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../styles/colors";
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetScrollView,
+} from "@gorhom/bottom-sheet";
+import { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const playExerciseMessage = (onDone, isFirstExercise = false) => {
   let message;
@@ -35,6 +40,9 @@ const instructions = [
   "Move with your breath.",
 ];
 
+const description =
+  "The Cat-Cow exercise is a gentle yoga flow that helps improve spinal flexibility, mobility, and posture. It involves moving between two positions: Cow (arched back) and Cat (rounded spine). This exercise is particularly beneficial for relieving tension in the spine, stretching the back muscles, and promoting relaxation. To learn more about the benefits and proper technique, check out these resources:";
+
 export default function ExerciseScreen() {
   const navigation = useNavigation();
 
@@ -46,13 +54,17 @@ export default function ExerciseScreen() {
   const [isRestModalVisible, setIsRestModalVisible] = useState(false);
   const [isPause, setIsPause] = useState(true);
   const [isSilent, setIsSilent] = useState(false);
-
+  const [infoSheetIdx, setInfoSheetIdx] = useState(-1);
   const { exercise_id, duration } = exercises[currExerciseIdx];
   const currExerciseModel = getExerciseById(exercise_id);
 
   const handleSilentMode = (isSilent) => {
     Speech.stop();
     setIsSilent(isSilent);
+  };
+
+  const handleInfoClick = () => {
+    setInfoSheetIdx(0);
   };
 
   const startExercise = () => {
@@ -85,10 +97,11 @@ export default function ExerciseScreen() {
         title={currExerciseModel.title}
         poses={currExerciseModel.demo_poses}
         onSilentModeChange={handleSilentMode}
+        onInfoClick={handleInfoClick}
       />
 
       <View style={styles.content}>
-        {instructions.map((item, idx) => (
+        {currExerciseModel.instructions.map((item, idx) => (
           <View
             key={idx}
             style={{ flexDirection: "row", alignItems: "center" }}
@@ -102,17 +115,17 @@ export default function ExerciseScreen() {
             <Text>{item}</Text>
           </View>
         ))}
+      </View>
 
-        <View style={{ alignSelf: "center" }}>
-          <Countdown
-            duration={duration}
-            onCompleted={() => setIsRestModalVisible(true)}
-            // reset the countdown when the current exercise changes
-            // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
-            reset={currExerciseModel}
-            running={!isPause}
-          />
-        </View>
+      <View style={{ alignSelf: "center" }}>
+        <Countdown
+          duration={duration}
+          onCompleted={() => setIsRestModalVisible(true)}
+          // reset the countdown when the current exercise changes
+          // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
+          reset={currExerciseModel}
+          running={!isPause}
+        />
       </View>
 
       <View style={styles.actions}>
@@ -143,6 +156,24 @@ export default function ExerciseScreen() {
           isSilent={isSilent}
         />
       )}
+
+      <BottomSheet
+        snapPoints={["60%", "90%"]}
+        enablePanDownToClose
+        index={infoSheetIdx}
+        onClose={() => setInfoSheetIdx(-1)}
+        backdropComponent={(props) => (
+          <BottomSheetBackdrop
+            {...props}
+            appearsOnIndex={0}
+            disappearsOnIndex={-1}
+          />
+        )}
+      >
+        <BottomSheetScrollView style={styles.bottom_sheet}>
+          <Text>{currExerciseModel.description}</Text>
+        </BottomSheetScrollView>
+      </BottomSheet>
     </ScreenLayout>
   );
 }
@@ -151,10 +182,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
+    gap: 12,
   },
   content: {
-    // alignItems: "center",
     padding: 16,
     gap: 12,
   },
@@ -162,10 +193,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   actions: {
-    // marginTop: "auto",
+    marginTop: "auto",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    gap: 1,
+    gap: 4,
+  },
+  bottom_sheet: {
+    padding: 16,
   },
 });
