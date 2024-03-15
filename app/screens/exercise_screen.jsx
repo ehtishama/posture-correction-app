@@ -117,7 +117,13 @@ export default function ExerciseScreen() {
         ))}
       </View>
 
-      <View style={{ alignSelf: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: "auto",
+        }}
+      >
         <Countdown
           duration={duration}
           onCompleted={() => setIsRestModalVisible(true)}
@@ -183,7 +189,7 @@ const styles = StyleSheet.create({
     padding: 16,
     flex: 1,
     justifyContent: "flex-start",
-    gap: 12,
+    gap: 8,
   },
   content: {
     padding: 16,
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   actions: {
-    marginTop: "auto",
+    // marginTop: "auto",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
