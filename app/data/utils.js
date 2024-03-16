@@ -20,3 +20,12 @@ export const getTrackById = (trackId) => {
 export const getExercisesFromTrack = (track) => {
   const result = {};
 };
+
+export const getTrackDuration = (trackId) => {
+  const track = getTrackById(trackId);
+
+  if (track)
+    return track.exercises.reduce((acc, curr) => acc + curr.duration, 0);
+
+  return 0;
+};

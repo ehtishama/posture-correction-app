@@ -2,6 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/Routes";
+import { Entypo } from "@expo/vector-icons";
 
 export const TrackItem = ({
   trackId,
@@ -25,8 +26,8 @@ export const TrackItem = ({
           <Text style={styles.title}>{title}</Text>
           <View style={styles.desc}>
             <Text>{numExercises} exercises </Text>
-            {/* <Entypo name="dot-single" size={16} color="black" /> */}
-            {/* <Text>{duration} mins</Text> */}
+            <Entypo name="dot-single" size={16} color="black" />
+            <Text>{Math.ceil(duration / 60)} mins</Text>
           </View>
         </View>
         <Image style={styles.cardImage} source={thumbnail} />

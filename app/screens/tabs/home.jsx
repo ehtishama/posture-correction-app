@@ -7,6 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import ScreenLayout from "../screen_layout";
 import { tracks } from "../../data";
 import { TrackItem } from "../../components/trackItem";
+import { getTrackDuration } from "../../data/utils";
 
 export default function HomeScreen() {
   return (
@@ -24,7 +25,7 @@ export default function HomeScreen() {
               trackId={item.id}
               title={item.title}
               numExercises={item.exercises.length}
-              duration={item.duration}
+              duration={getTrackDuration(item.id)}
               thumbnail={item.thumbnail}
             />
           )}

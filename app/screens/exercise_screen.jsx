@@ -1,7 +1,6 @@
-import { Modal, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ExerciseDemoCard } from "../components/exerciseDemoCard";
-import typography from "../styles/typography";
 import Button from "../components/button";
 
 import Countdown from "../components/countdown";
@@ -18,7 +17,6 @@ import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
-import { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const playExerciseMessage = (onDone, isFirstExercise = false) => {
   let message;
@@ -32,16 +30,6 @@ const playExerciseMessage = (onDone, isFirstExercise = false) => {
     onDone,
   });
 };
-const instructions = [
-  "Start on all fours.",
-  "Arch your back while inhaling (Cow position). 🐄",
-  "Round your spine while exhaling (Cat position). 😺",
-  "Flow smoothly between Cat and Cow.",
-  "Move with your breath.",
-];
-
-const description =
-  "The Cat-Cow exercise is a gentle yoga flow that helps improve spinal flexibility, mobility, and posture. It involves moving between two positions: Cow (arched back) and Cat (rounded spine). This exercise is particularly beneficial for relieving tension in the spine, stretching the back muscles, and promoting relaxation. To learn more about the benefits and proper technique, check out these resources:";
 
 export default function ExerciseScreen() {
   const navigation = useNavigation();
@@ -85,7 +73,7 @@ export default function ExerciseScreen() {
   // Starts the exercise countdown on navigations, and idx change
   // If idx 0, play first exercise message
   useEffect(() => {
-    return; // temporarily disable auto start
+    // return; // temporarily disable auto start
 
     if (isSilent) startExercise();
     else playExerciseMessage(startExercise, currExerciseIdx == 0);
