@@ -52,7 +52,7 @@ const TakeRestModal = ({ onRestComplete, isSilent }) => {
           </Text>
         </View>
         <Countdown
-          duration={10}
+          duration={30}
           onCompleted={onRestComplete}
           running={countdownRunning}
         />
