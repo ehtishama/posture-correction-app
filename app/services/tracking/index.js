@@ -34,6 +34,10 @@ class TrackingService {
   addCompletedWorkout(workout) {
     this.storage.push("completed_workouts", workout);
   }
+
+  getAllCompletedWorkouts() {
+    return this.storage.get("completed_workouts");
+  }
 }
 
 const trackingService = Object.freeze(new TrackingService(storageService));

@@ -16,6 +16,13 @@ class Storage {
     this.storage = storage;
   }
 
+  get(key) {
+    if (this.storage.contains(key)) {
+      return JSON.parse(this.storage.getString(key));
+    }
+    return null;
+  }
+
   set(key, value) {
     this.storage.set(key, value);
   }
@@ -41,7 +48,7 @@ class Storage {
 
 const _storage = new MMKV({
   id: "global-mmkv-storage",
-//   path: `posture-perfect/storage`,
+  //   path: `posture-perfect/storage`,
   encryptionKey: "hunter2",
 });
 export const storageService = new Storage(_storage);
