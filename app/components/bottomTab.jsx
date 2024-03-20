@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { colors } from "../styles/colors";
 import BottomTabItem from "./bottomTabItem";
 import { LinearGradient } from "expo-linear-gradient";

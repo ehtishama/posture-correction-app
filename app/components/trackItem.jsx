@@ -3,6 +3,8 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/Routes";
 import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export const TrackItem = ({
   trackId,
@@ -25,8 +27,10 @@ export const TrackItem = ({
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
           <View style={styles.desc}>
+            <Ionicons name="barbell-outline" size={16} />
             <Text>{numExercises} exercises </Text>
             <Entypo name="dot-single" size={16} color="black" />
+            <MaterialIcons name="timer" size={16} />
             <Text>{Math.ceil(duration / 60)} mins</Text>
           </View>
         </View>
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
   content: {
     alignSelf: "center",
     padding: 16,
+    gap: 4
   },
   title: {
     fontSize: 20,
@@ -65,5 +70,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    gap: 2
   },
 });

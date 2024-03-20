@@ -35,7 +35,7 @@ export default function ExerciseScreen() {
   const navigation = useNavigation();
 
   const {
-    params: { exercises },
+    params: { exercises, trackId },
   } = useRoute();
 
   const [currExerciseIdx, setCurrExerciseIdx] = useState(0);
@@ -62,7 +62,8 @@ export default function ExerciseScreen() {
   const nextExercise = () => {
     if (currExerciseIdx + 1 < exercises.length) {
       setCurrExerciseIdx((idx) => idx + 1);
-    } else navigation.replace(STACK_ROUTES.SESSION_COMPLETE_SCREEN);
+    } else
+      navigation.replace(STACK_ROUTES.SESSION_COMPLETE_SCREEN, { trackId });
   };
 
   const prevExercise = () => {

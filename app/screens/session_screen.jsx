@@ -47,6 +47,7 @@ const SessionScreen = () => {
           onPress={() =>
             navigation.navigate(STACK_ROUTES.EXERCISE_SCREEN, {
               exercises,
+              trackId,
             })
           }
         />
