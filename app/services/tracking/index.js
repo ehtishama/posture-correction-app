@@ -8,6 +8,7 @@
  *
  */
 
+import { isEqual, isSameDay } from "date-fns";
 import { storageService } from "../storage";
 
 let instance;
@@ -36,8 +37,30 @@ class TrackingService {
   }
 
   getAllCompletedWorkouts() {
-    return this.storage.get("completed_workouts");
+    if (this.storage.exists("completed_workouts"))
+      return this.storage.get("completed_workouts");
+    else return [];
   }
+
+  /**
+   *
+   * @param {Date} date
+   * @returns
+   */
+  getWorkoutsByDate(date) {
+    const workouts = this.getAllCompletedWorkouts();
+    return workouts.filter((workout) => isSameDay(date, workout.createdAt));
+  }
+  
+  // saveWorkout()
+  // getAllWorkouts()
+  // getWorkoutsForSpecificDate()
+  // deleteWorkout()
+
+  // getTotalWorkoutsCompleted()
+  // getAverageWorkoutsPerWeek()
+  // getMostFrequentWorkoutType()
+  // getMostFrequentWorkoutType()
 }
 
 const trackingService = Object.freeze(new TrackingService(storageService));

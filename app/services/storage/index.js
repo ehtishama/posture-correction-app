@@ -44,6 +44,10 @@ class Storage {
       this.storage.set(key, JSON.stringify(x));
     }
   }
+
+  exists(key) {
+    return this.storage.contains(key);
+  }
 }
 
 const _storage = new MMKV({
