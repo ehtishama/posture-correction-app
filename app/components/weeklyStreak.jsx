@@ -15,7 +15,7 @@ export default function WeeklyStreak() {
   return (
     <View>
       <View style={styles.weekly_history}>
-        <Text style={typography.titleMedium}>Last 7 days</Text>
+        {/* <Text style={typography.titleMedium}></Text> */}
         <View style={styles.dates_weekly}>
           {weeklyData.map(({ day, workouts }, idx) => (
             <DateItem
