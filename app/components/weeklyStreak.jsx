@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
-import typography from "../styles/typography";
+import React from "react";
 import { colors } from "../styles/colors";
 import { datetimeUtils } from "../utils/datetime";
 import trackingService from "../services/tracking";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import typography from "../styles/typography";
 
 const weeklyData = datetimeUtils
   .getLast7Days(new Date())
@@ -15,7 +14,7 @@ export default function WeeklyStreak() {
   return (
     <View>
       <View style={styles.weekly_history}>
-        {/* <Text style={typography.titleMedium}></Text> */}
+        <Text style={typography.titleBase}>Streak history</Text>
         <View style={styles.dates_weekly}>
           {weeklyData.map(({ day, workouts }, idx) => (
             <DateItem
