@@ -3,4 +3,5 @@ export const STACK_ROUTES = {
   EXERCISE_SCREEN: "ExerciseScreen",
   SESSION_SCREEN: "SessionScreen",
   SESSION_COMPLETE_SCREEN: "SessionCompleteScreen",
+  FEEDBACK_SCREEN: "FeedbackScreen",
 };

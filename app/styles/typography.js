@@ -26,6 +26,10 @@ export default StyleSheet.create({
     fontSize: 40,
     lineHeight: 40,
   },
+  bodySmall: {
+    fontSize: 14,
+    lineHeight: 24,
+  },
   bodyBase: {
     fontSize: 16,
     lineHeight: 24,

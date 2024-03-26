@@ -10,4 +10,5 @@ export const colors = StyleSheet.create({
   primary_50: "#E33812",
   primary_70: "#711C09",
   primary_60: "#AA2A0E",
+  border: "#333"
 });

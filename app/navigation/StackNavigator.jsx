@@ -5,6 +5,7 @@ import SessionCompleteScreen from "../screens/session_complete_screen";
 import TabNavigator from "./TabNavigator";
 import ExerciseScreen from "../screens/exercise_screen";
 import { STACK_ROUTES } from "./Routes";
+import FeedbackScreen from "../screens/feeback_screen";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,10 @@ export default function StackNavigator() {
       <Stack.Screen
         name={STACK_ROUTES.SESSION_COMPLETE_SCREEN}
         component={SessionCompleteScreen}
+      />
+      <Stack.Screen
+        name={STACK_ROUTES.FEEDBACK_SCREEN}
+        component={FeedbackScreen}
       />
     </Stack.Navigator>
   );
