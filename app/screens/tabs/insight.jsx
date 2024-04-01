@@ -15,12 +15,12 @@ export default function InsightScreen() {
 
   return (
     <ScreenLayout style={styles.container}>
-      <Text style={typography.titleXLarge}>Your weekly report</Text>
+      <Text style={typography.titleXLarge}>Weekly Insights</Text>
       <WeeklyStreak />
       <WorkoutTimeChart />
 
       <View>
-        <Text style={typography.titleBase}>Totals this week</Text>
+        <Text style={typography.titleBase}>This week</Text>
         <View style={styles.row}>
           <View style={styles.stat_card}>
             <Text style={[typography.titleLarge, styles.on_primary]}>

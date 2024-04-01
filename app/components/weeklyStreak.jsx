@@ -6,6 +6,8 @@ import trackingService from "../services/tracking";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import typography from "../styles/typography";
 
+import { format } from "date-fns";
+
 const weeklyData = datetimeUtils
   .getLast7Days(new Date())
   .map((day) => ({ day, workouts: trackingService.getWorkoutsByDate(day) }));
@@ -14,14 +16,10 @@ export default function WeeklyStreak() {
   return (
     <View>
       <View style={styles.weekly_history}>
-        <Text style={typography.titleBase}>Streak history</Text>
+        <Text style={typography.titleBase}>Daily Tracker</Text>
         <View style={styles.dates_weekly}>
           {weeklyData.map(({ day, workouts }, idx) => (
-            <DateItem
-              key={idx}
-              text={day.getDate()}
-              selected={workouts.length > 0}
-            />
+            <DateItem key={idx} date={day} selected={workouts.length > 0} />
           ))}
         </View>
       </View>
@@ -29,21 +27,36 @@ export default function WeeklyStreak() {
   );
 }
 
-function DateItem({ text, selected }) {
+function DateItem({ date, selected }) {
   return (
     <View style={styles.date_item_container}>
-      <View style={[styles.date_item, selected && styles.selected]}>
-        <Text style={[styles.date_text, selected && styles.selected_text]}>
-          {text}
-        </Text>
-      </View>
-      {selected && (
+      {selected ? (
         <MaterialCommunityIcons
           name="check-circle"
-          size={24}
+          size={16}
           color={colors.primary_70}
         />
+      ) : (
+        <MaterialCommunityIcons
+          name="check-circle-outline"
+          size={16}
+          color={"#e0e0e0"}
+        />
       )}
+      <View style={[styles.date_item, selected && styles.selected]}>
+        <Text style={[styles.date_text, selected && styles.selected_text]}>
+          {date.getDate()}
+        </Text>
+        <Text
+          style={[
+            styles.date_text,
+            selected && styles.selected_text,
+            { fontSize: 12 },
+          ]}
+        >
+          {format(date, "eee")}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -63,12 +76,12 @@ const styles = StyleSheet.create({
   },
 
   date_item: {
-    height: 40,
-    width: 40,
+    height: 48,
+    width: 48,
     borderColor: colors.primary_30,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
+    borderRadius: 12,
     borderWidth: 2,
   },
   date_text: {
