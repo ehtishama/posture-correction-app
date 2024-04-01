@@ -8,7 +8,13 @@
  *
  */
 
-import { isEqual, isSameDay } from "date-fns";
+import {
+  addDays,
+  isEqual,
+  isSameDay,
+  isWithinInterval,
+  startOfToday,
+} from "date-fns";
 import { storageService } from "../storage";
 
 let instance;
@@ -36,6 +42,10 @@ class TrackingService {
     this.storage.push("completed_workouts", workout);
   }
 
+  /**
+   *
+   * @returns {Object[]}
+   */
   getAllCompletedWorkouts() {
     if (this.storage.exists("completed_workouts"))
       return this.storage.get("completed_workouts");
@@ -57,7 +67,30 @@ class TrackingService {
   // getWorkoutsForSpecificDate()
   // deleteWorkout()
 
-  // getTotalWorkoutsCompleted()
+  /**
+   *
+   * @param {Date} startDate
+   * @param {Date} endDate
+   * @returns {Object[]}
+   */
+  totalWorkoutsCompleted(startDate, endDate) {
+    const workouts = this.getAllCompletedWorkouts();
+    return workouts.filter((workout) =>
+      isWithinInterval(workout.createdAt, {
+        start: startDate,
+        end: endDate,
+      })
+    ).length;
+  }
+
+  /**
+   * @returns {Object[]}
+   */
+  totalWorkoutsCompletedLastWeek() {
+    const today = startOfToday();
+    return this.totalWorkoutsCompleted(today, addDays(today, -7));
+  }
+
   // getAverageWorkoutsPerWeek()
   // getMostFrequentWorkoutType()
   // getMostFrequentWorkoutType()

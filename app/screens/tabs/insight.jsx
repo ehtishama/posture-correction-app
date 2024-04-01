@@ -5,6 +5,7 @@ import WeeklyStreak from "../../components/weeklyStreak";
 import { colors } from "../../styles/colors";
 import typography from "../../styles/typography";
 import WorkoutTimeChart from "../../components/WorkoutTimeChart";
+import trackingService from "../../services/tracking";
 
 export default function InsightScreen() {
   // useEffect(() => {
@@ -31,7 +32,8 @@ export default function InsightScreen() {
 
           <View style={styles.stat_card}>
             <Text style={[typography.titleLarge, styles.on_primary]}>
-              9<Text style={typography.bodyMedium}> </Text>
+              {trackingService.totalWorkoutsCompletedLastWeek()}
+              <Text style={typography.bodyMedium}> </Text>
             </Text>
             <Text style={styles.on_primary}>workouts completed</Text>
           </View>
