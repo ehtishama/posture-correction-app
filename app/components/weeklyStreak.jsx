@@ -39,7 +39,7 @@ function DateItem({ text, selected }) {
       </View>
       {selected && (
         <MaterialCommunityIcons
-          name="fire"
+          name="check-circle"
           size={24}
           color={colors.primary_70}
         />
