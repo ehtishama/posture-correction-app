@@ -8,11 +8,7 @@ import WorkoutTimeChart from "../../components/WorkoutTimeChart";
 import trackingService from "../../services/tracking";
 
 export default function InsightScreen() {
-  // useEffect(() => {
-  //   const completedWorkouts = trackingService.getAllCompletedWorkouts();
-
-  //   console.log(completedWorkouts);
-  // }, []);
+  const timeExercised = trackingService.totalTimeExercisedLastWeek();
 
   return (
     <ScreenLayout style={styles.container}>
@@ -25,9 +21,12 @@ export default function InsightScreen() {
         <View style={styles.row}>
           <View style={styles.stat_card}>
             <Text style={[typography.titleLarge, styles.on_primary]}>
-              137<Text style={typography.bodyMedium}> </Text>
+              {timeExercised > 60 ? timeExercised / 60 : timeExercised}
+              <Text style={typography.bodyMedium}></Text>
             </Text>
-            <Text style={styles.on_primary}>mins exercised</Text>
+            <Text style={styles.on_primary}>
+              {timeExercised > 60 ? "mins" : "seconds"} exercised
+            </Text>
           </View>
 
           <View style={styles.stat_card}>

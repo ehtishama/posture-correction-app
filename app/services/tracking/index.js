@@ -10,12 +10,15 @@
 
 import {
   addDays,
+  endOfToday,
   isEqual,
   isSameDay,
   isWithinInterval,
   startOfToday,
+  subDays,
 } from "date-fns";
 import { storageService } from "../storage";
+import { getTrackDuration } from "../../data/utils";
 
 let instance;
 
@@ -87,14 +90,37 @@ class TrackingService {
    * @returns {Object[]}
    */
   totalWorkoutsCompletedLastWeek() {
-    const today = startOfToday();
-    return this.totalWorkoutsCompleted(today, addDays(today, -7));
+    const today = endOfToday();
+    return this.totalWorkoutsCompleted(subDays(today, 7), today);
   }
 
-  // getAverageWorkoutsPerWeek()
-  // getMostFrequentWorkoutType()
-  // getMostFrequentWorkoutType()
+  /**
+   * @param {Date} startDate
+   * @param {Date} endDate
+   * @returns {Number} Time exercised in the date range given by startDate and endDate params.
+   */
+  totalTimeExercised(startDate, endDate) {
+    const interval = {
+      start: startDate,
+      end: endDate,
+    };
+
+    return this.getAllCompletedWorkouts()
+      .filter((workout) => isWithinInterval(workout.createdAt, interval))
+      .reduce((acc, curr) => acc + getTrackDuration(curr.track), 0);
+  }
+
+  /**
+   * @returns {Number} Time exercised in the last week starting from today.
+   */
+  totalTimeExercisedLastWeek() {
+    const today = endOfToday();
+    return this.totalTimeExercised(subDays(today, 7), today);
+  }
 }
+// getAverageWorkoutsPerWeek()
+// getMostFrequentWorkoutType()
+// getMostFrequentWorkoutType()
 
 const trackingService = Object.freeze(new TrackingService(storageService));
 
