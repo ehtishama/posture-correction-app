@@ -321,7 +321,7 @@ export const data = {
     {
       id: 1,
       title: "Basic",
-      thumbnail: "",
+      thumbnail: require("../../assets/basic-plan.jpg"),
       exercises: [
         { exercise_id: 1, duration: 30 },
         // { exercise_id: 2, duration: 30 },
@@ -340,7 +340,7 @@ export const data = {
     {
       id: 2,
       title: "Intermediate",
-      thumbnail: "",
+      thumbnail: require("../../assets/intermediate-plan.jpg"),
       exercises: [
         { exercise_id: 1, duration: 45 },
         { exercise_id: 2, duration: 45 },
@@ -361,8 +361,8 @@ export const data = {
     },
     {
       id: 3,
-      title: "Advanced",
-      thumbnail: "",
+      title: "Advance",
+      thumbnail: require("../../assets/intermediate-plan.jpg"),
       exercises: [
         { exercise_id: 1, duration: 60 },
         { exercise_id: 2, duration: 60 },

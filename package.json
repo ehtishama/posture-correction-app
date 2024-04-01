@@ -13,6 +13,7 @@
     "@gorhom/bottom-sheet": "^4.6.1",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/native": "^6.1.10",
+    "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.21",
     "@shopify/react-native-skia": "0.1.196",
     "date-fns": "^3.6.0",

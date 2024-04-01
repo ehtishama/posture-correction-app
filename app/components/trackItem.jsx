@@ -5,6 +5,7 @@ import { STACK_ROUTES } from "../navigation/Routes";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import Animated from "react-native-reanimated";
 
 export const TrackItem = ({
   trackId,
@@ -34,7 +35,11 @@ export const TrackItem = ({
             <Text>{Math.ceil(duration / 60)} mins</Text>
           </View>
         </View>
-        <Image style={styles.cardImage} source={thumbnail} />
+        <Animated.Image
+          style={styles.cardImage}
+          source={thumbnail}
+          sharedTransitionTag="tag"
+        />
       </View>
     </Pressable>
   );
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
   content: {
     alignSelf: "center",
     padding: 16,
-    gap: 4
+    gap: 4,
   },
   title: {
     fontSize: 20,
@@ -70,6 +75,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 2
+    gap: 2,
   },
 });

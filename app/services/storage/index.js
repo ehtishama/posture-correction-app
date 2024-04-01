@@ -14,6 +14,7 @@ class Storage {
    * @param {MMKV} storage
    */
   constructor(storage) {
+    storage.clearAll();
     this.storage = storage;
   }
 
@@ -78,5 +79,9 @@ const _storage = new MMKV({
 
 export const storageService = new Storage(_storage);
 
-console.log("MMKV Storage Instance: ");
-console.log(JSON.parse(_storage.getString("completed_workouts")));
+// try {
+//   console.log("MMKV Storage Instance: ");
+//   console.log(JSON.parse(_storage.getString("completed_workouts")));
+// } catch (error) {
+//   console.error(error);
+// }

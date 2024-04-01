@@ -1,4 +1,4 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import ExerciseScreen from "../screens/exercise_screen";
 import SessionScreen from "../screens/session_screen";
 import SessionCompleteScreen from "../screens/session_complete_screen";
@@ -7,7 +7,7 @@ import ExerciseScreen from "../screens/exercise_screen";
 import { STACK_ROUTES } from "./Routes";
 import FeedbackScreen from "../screens/feeback_screen";
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
   return (

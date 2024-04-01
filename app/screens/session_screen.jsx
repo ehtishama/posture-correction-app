@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { colors } from "../styles/colors";
 import typography from "../styles/typography";
 import ExerciseItem from "../components/exerciseItem";
 import Button from "../components/button";
-
+import Animated from "react-native-reanimated";
 import { FlatList } from "react-native";
 import { getTrackById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -22,6 +22,11 @@ const SessionScreen = () => {
 
   return (
     <ScreenLayout>
+      <Animated.Image
+        source={track.thumbnail}
+        style={{ height: 250, objectFit: "cover", width: "100%" }}
+        sharedTransitionTag="tag"
+      />
       <View style={styles.header}>
         <Text style={typography.titleLarge}>{track.title}</Text>
         <Text style={[typography.bodyMedium, styles.headerBodyText]}>
