@@ -5,6 +5,11 @@ import { useFont } from "@shopify/react-native-skia";
 import SpaceGrotesk from "../../assets/fonts/SpaceGrotesk_700Bold.ttf";
 import typography from "../styles/typography";
 import { colors } from "../styles/colors";
+import { datetimeUtils } from "../utils/datetime";
+import { format } from "date-fns";
+import trackingService from "../services/tracking";
+import { getTrackDuration } from "../data/utils";
+
 const _data = [
   { day: "Sunday", workout_time: 60 },
   { day: "Monday", workout_time: 10 },
@@ -13,6 +18,13 @@ const _data = [
   { day: "Thursday", workout_time: 90 },
   { day: "Friday", workout_time: 50 },
 ];
+
+const data = datetimeUtils.getLast7Days().map((x) => ({
+  day: format(x, "eee"),
+  workout_time: trackingService
+    .getWorkoutsByDate(x)
+    .reduce((acc, curr) => acc + getTrackDuration(curr.track), 0),
+}));
 
 export default function WorkoutTimeChart() {
   const font = useFont(SpaceGrotesk, 12);
@@ -26,7 +38,7 @@ export default function WorkoutTimeChart() {
             left: 48,
             right: 48,
           }}
-          data={_data}
+          data={data}
           xKey="day"
           yKeys={["workout_time"]}
           axisOptions={{
@@ -35,6 +47,7 @@ export default function WorkoutTimeChart() {
             formatYLabel: (val) =>
               val > 60 ? `${Math.floor(val / 60)}h${val % 60}m` : `${val}m`,
             axisSide: { x: "bottom", y: "right" },
+            tickCount: 7,
           }}
         >
           {({ points, chartBounds }) => (

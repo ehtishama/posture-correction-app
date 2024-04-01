@@ -5,6 +5,7 @@ export const datetimeUtils = {
    *
    * @param {Date} start
    * @param {Date} end
+   * @returns {Date[]}
    */
   getDateRange(start, end) {
     return eachDayOfInterval({ start, end });
@@ -13,9 +14,9 @@ export const datetimeUtils = {
   /**
    *
    * @param {Date} date
-   * @returns
+   * @returns {Date[]}
    */
-  getLast7Days(date) {
+  getLast7Days(date = new Date()) {
     const startDate = addDays(date, -6);
     return this.getDateRange(startDate, date);
   },

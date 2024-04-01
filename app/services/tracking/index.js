@@ -45,13 +45,13 @@ class TrackingService {
   /**
    *
    * @param {Date} date
-   * @returns
+   * @returns {Object[]}
    */
   getWorkoutsByDate(date) {
     const workouts = this.getAllCompletedWorkouts();
     return workouts.filter((workout) => isSameDay(date, workout.createdAt));
   }
-  
+
   // saveWorkout()
   // getAllWorkouts()
   // getWorkoutsForSpecificDate()
