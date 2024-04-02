@@ -21,7 +21,9 @@ export default function InsightScreen() {
         <View style={styles.row}>
           <View style={styles.stat_card}>
             <Text style={[typography.titleLarge, styles.on_primary]}>
-              {timeExercised > 60 ? timeExercised / 60 : timeExercised}
+              {timeExercised > 60
+                ? Math.ceil(timeExercised / 60)
+                : timeExercised}
               <Text style={typography.bodyMedium}></Text>
             </Text>
             <Text style={styles.on_primary}>

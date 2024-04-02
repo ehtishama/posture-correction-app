@@ -23,7 +23,10 @@ const data = datetimeUtils.getLast7Days().map((x) => ({
   day: format(x, "eee"),
   workout_time: trackingService
     .getWorkoutsByDate(x)
-    .reduce((acc, curr) => acc + getTrackDuration(curr.track), 0),
+    .reduce(
+      (acc, curr) => acc + Math.ceil(getTrackDuration(curr.track) / 60),
+      0
+    ),
 }));
 
 export default function WorkoutTimeChart() {

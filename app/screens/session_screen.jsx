@@ -1,6 +1,5 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { colors } from "../styles/colors";
 import typography from "../styles/typography";
 import ExerciseItem from "../components/exerciseItem";
 import Button from "../components/button";
@@ -26,7 +25,6 @@ const SessionScreen = () => {
         <Animated.Image
           source={track.thumbnail}
           style={{ height: 250, objectFit: "cover", width: "100%" }}
-          sharedTransitionTag="tag"
         />
         <View style={styles.headerTextContainer}>
           <Text style={[typography.titleLarge, { color: "white" }]}>
@@ -84,7 +82,6 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
     backgroundColor: "rgba(0,0,0,0.5)",
-    
   },
   headerBodyText: {
     width: "100%",

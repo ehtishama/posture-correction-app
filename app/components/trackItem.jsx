@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/Routes";
@@ -35,11 +35,7 @@ export const TrackItem = ({
             <Text>{Math.ceil(duration / 60)} mins</Text>
           </View>
         </View>
-        <Animated.Image
-          style={styles.cardImage}
-          source={thumbnail}
-          sharedTransitionTag="tag"
-        />
+        <Animated.Image style={styles.cardImage} source={thumbnail} />
       </View>
     </Pressable>
   );
@@ -70,9 +66,11 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 120,
     height: 120,
+    borderRadius: 20,
+    margin: 8,
+    shadowColor: "#000",
   },
   desc: {
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap: 2,
