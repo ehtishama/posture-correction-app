@@ -31,8 +31,7 @@ const SECTIONS = [
 
 export default function SettingScreen() {
   return (
-    <ScreenLayout style={styles.container}>
-      <Text style={typography.titleLarge}>Settings</Text>
+    <ScreenLayout style={styles.container} title={"Settings"} back>
       <ScrollView style={styles.sections_list}>
         {SECTIONS.map((section, idx) => (
           <View key={idx}>

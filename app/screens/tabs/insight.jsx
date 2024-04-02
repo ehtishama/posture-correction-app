@@ -11,12 +11,11 @@ export default function InsightScreen() {
   const timeExercised = trackingService.totalTimeExercisedLastWeek();
 
   return (
-    <ScreenLayout style={styles.container}>
-      <Text style={typography.titleXLarge}>Weekly Insights</Text>
+    <ScreenLayout style={styles.container} title={"Weekly Insights"} back>
       <WeeklyStreak />
       <WorkoutTimeChart />
 
-      <View>
+      <View style={{ gap: 8 }}>
         <Text style={typography.titleBase}>This week</Text>
         <View style={styles.row}>
           <View style={styles.stat_card}>
@@ -46,7 +45,7 @@ export default function InsightScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     padding: 16,
     gap: 16,
   },
@@ -61,6 +60,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   on_primary: {
-    color: "white",
+    color: colors.primary_30,
   },
 });
