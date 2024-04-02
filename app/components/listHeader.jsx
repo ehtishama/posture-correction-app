@@ -4,7 +4,7 @@ import React from "react";
 export const ListHeader = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Exercises</Text>
+      <Text style={styles.title}>Workout Plans</Text>
     </View>
   );
 };
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: "black",
     marginVertical: 16,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   title: {
     fontWeight: "700",

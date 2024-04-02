@@ -30,8 +30,8 @@ const SessionScreen = () => {
           <Text style={[typography.titleLarge, { color: "white" }]}>
             {track.title}
           </Text>
-          <Text style={[typography.bodyMedium, styles.headerBodyText]}>
-            Start lighty with these basic exercises and change difficulty as you
+          <Text style={[typography.bodyBase, styles.headerBodyText]}>
+            Start lighty with these basic exercises and then change the difficulty as you
             go.
           </Text>
         </View>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   headerBodyText: {
-    width: "100%",
     color: "white",
   },
   startButton: {

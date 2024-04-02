@@ -6,6 +6,7 @@ import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import Animated from "react-native-reanimated";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const TrackItem = ({
   trackId,
@@ -17,7 +18,7 @@ export const TrackItem = ({
   const navigation = useNavigation();
 
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={() =>
         navigation.navigate(STACK_ROUTES.SESSION_SCREEN, {
           trackId,
@@ -28,16 +29,22 @@ export const TrackItem = ({
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
           <View style={styles.desc}>
-            <Ionicons name="barbell-outline" size={16} />
-            <Text>{numExercises} exercises </Text>
-            <Entypo name="dot-single" size={16} color="black" />
-            <MaterialIcons name="timer" size={16} />
-            <Text>{Math.ceil(duration / 60)} mins</Text>
+            <View style={styles.row}>
+              <Ionicons name="barbell-outline" size={16} />
+              <Text>{numExercises} exercises </Text>
+            </View>
+
+            {/* <Entypo name="dot-single" size={16} color="black" /> */}
+
+            <View style={styles.row}>
+              <MaterialIcons name="timer" size={16} />
+              <Text>{Math.ceil(duration / 60)} mins</Text>
+            </View>
           </View>
         </View>
         <Animated.Image style={styles.cardImage} source={thumbnail} />
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
@@ -58,21 +65,28 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     padding: 16,
     gap: 4,
+    flex: 1,
   },
   title: {
     fontSize: 20,
     fontWeight: "700",
   },
   cardImage: {
-    width: 120,
-    height: 120,
+    width: 96,
+    height: 96,
     borderRadius: 20,
     margin: 8,
     shadowColor: "#000",
   },
   desc: {
     flexDirection: "row",
+    flexWrap: "wrap",
     alignItems: "center",
     gap: 2,
+  },
+
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
