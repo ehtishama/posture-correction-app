@@ -22,17 +22,21 @@ const SessionScreen = () => {
 
   return (
     <ScreenLayout>
-      <Animated.Image
-        source={track.thumbnail}
-        style={{ height: 250, objectFit: "cover", width: "100%" }}
-        sharedTransitionTag="tag"
-      />
       <View style={styles.header}>
-        <Text style={typography.titleLarge}>{track.title}</Text>
-        <Text style={[typography.bodyMedium, styles.headerBodyText]}>
-          Start lighty with these basic exercises and change difficulty as you
-          go.
-        </Text>
+        <Animated.Image
+          source={track.thumbnail}
+          style={{ height: 250, objectFit: "cover", width: "100%" }}
+          sharedTransitionTag="tag"
+        />
+        <View style={styles.headerTextContainer}>
+          <Text style={[typography.titleLarge, { color: "white" }]}>
+            {track.title}
+          </Text>
+          <Text style={[typography.bodyMedium, styles.headerBodyText]}>
+            Start lighty with these basic exercises and change difficulty as you
+            go.
+          </Text>
+        </View>
       </View>
 
       <FlatList
@@ -68,17 +72,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 240,
-    display: "flex",
     justifyContent: "center",
-    backgroundColor: colors.primary_10,
-    padding: 16,
-    elevation: 4,
     borderBottomWidth: 1,
     borderColor: "#ccc",
+    position: "relative",
+  },
+  headerTextContainer: {
+    padding: 20,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    
   },
   headerBodyText: {
-    width: "80%",
+    width: "100%",
+    color: "white",
   },
   startButton: {
     position: "absolute",
