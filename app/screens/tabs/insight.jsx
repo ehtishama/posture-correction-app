@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ScreenLayout from "../screen_layout";
 import WeeklyStreak from "../../components/weeklyStreak";
 
@@ -11,8 +11,14 @@ export default function InsightScreen() {
   const timeExercised = trackingService.totalTimeExercisedLastWeek();
 
   return (
-    <ScreenLayout style={styles.container} title={"Weekly Insights"} back>
+    <ScreenLayout
+      style={styles.container}
+      title={"Weekly Insights"}
+      back
+      scrollview
+    >
       <WeeklyStreak />
+      <WorkoutTimeChart />
       <WorkoutTimeChart />
 
       <View style={{ gap: 8 }}>
@@ -39,6 +45,7 @@ export default function InsightScreen() {
           </View>
         </View>
       </View>
+      {/* <View style={{ height: 120 }} /> */}
     </ScreenLayout>
   );
 }

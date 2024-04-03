@@ -29,7 +29,12 @@ const SessionScreen = () => {
         />
 
         <BackButton
-          containerStyles={{ position: "absolute", top: 0, left: 0 }}
+          containerStyles={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            borderBottomWidth: 0,
+          }}
         />
 
         <View style={styles.headerTextContainer}>

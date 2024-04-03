@@ -14,7 +14,10 @@ export default function ScreenLayout({
     <SafeAreaView style={{ flex: 1 }}>
       {back && <BackButton title={title} />}
       {scrollview ? (
-        <ScrollView style={[_styles.container, style]}>{children}</ScrollView>
+        <ScrollView contentContainerStyle={[style]}>
+          {children}
+          <View style={{ height: 72 }} />
+        </ScrollView>
       ) : (
         <View style={[_styles.container, style]}>{children}</View>
       )}

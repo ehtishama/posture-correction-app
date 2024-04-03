@@ -35,5 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 16,
     padding: 16,
+    borderBottomColor: colors.primary_5,
+    borderBottomWidth: 1,
   },
 });
