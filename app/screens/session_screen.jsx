@@ -9,6 +9,7 @@ import { getTrackById } from "../data/utils";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/Routes";
 import ScreenLayout from "./screen_layout";
+import BackButton from "../components/BackButton";
 
 const SessionScreen = () => {
   const navigation = useNavigation();
@@ -26,13 +27,18 @@ const SessionScreen = () => {
           source={track.thumbnail}
           style={{ height: 250, objectFit: "cover", width: "100%" }}
         />
+
+        <BackButton
+          containerStyles={{ position: "absolute", top: 0, left: 0 }}
+        />
+
         <View style={styles.headerTextContainer}>
           <Text style={[typography.titleLarge, { color: "white" }]}>
             {track.title}
           </Text>
           <Text style={[typography.bodyBase, styles.headerBodyText]}>
-            Start lighty with these basic exercises and then change the difficulty as you
-            go.
+            Start lighty with these basic exercises and then change the
+            difficulty as you go.
           </Text>
         </View>
       </View>
