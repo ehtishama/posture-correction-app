@@ -35,8 +35,9 @@ export default function WorkoutTimeChart() {
   return (
     <View>
       <Text style={typography.titleBase}>Time spent</Text>
-      <View style={{ height: 300, marginVertical: 16 }}>
+      <View style={{ height: 240, marginVertical: 16 }}>
         <CartesianChart
+          padding={{ right: 16 }}
           domainPadding={{
             left: 48,
             right: 48,

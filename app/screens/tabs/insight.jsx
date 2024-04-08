@@ -19,7 +19,6 @@ export default function InsightScreen() {
     >
       <WeeklyStreak />
       <WorkoutTimeChart />
-      <WorkoutTimeChart />
 
       <View style={{ gap: 8 }}>
         <Text style={typography.titleBase}>This week</Text>
