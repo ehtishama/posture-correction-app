@@ -21,7 +21,7 @@ export default function InsightScreen() {
       <WorkoutTimeChart />
 
       <View style={{ gap: 8 }}>
-        <Text style={typography.titleBase}>This week</Text>
+        <Text style={typography.titleBase}>This week summary</Text>
         <View style={styles.row}>
           <View style={styles.stat_card}>
             <Text style={[typography.titleLarge, styles.on_primary]}>
@@ -44,7 +44,6 @@ export default function InsightScreen() {
           </View>
         </View>
       </View>
-      {/* <View style={{ height: 120 }} /> */}
     </ScreenLayout>
   );
 }

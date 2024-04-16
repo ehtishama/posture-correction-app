@@ -54,7 +54,7 @@ function DateItem({ date, selected }) {
             { fontSize: 12 },
           ]}
         >
-          {format(date, "eee")}
+          {format(date, "eee").substring(0, 2)}
         </Text>
       </View>
     </View>
@@ -76,12 +76,12 @@ const styles = StyleSheet.create({
   },
 
   date_item: {
-    height: 48,
-    width: 48,
+    height: 44,
+    width: 44,
     borderColor: colors.primary_30,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 12,
+    borderRadius: 8,
     borderWidth: 2,
   },
   date_text: {
