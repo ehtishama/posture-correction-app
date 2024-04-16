@@ -29,41 +29,47 @@ const data = datetimeUtils.getLast7Days().map((x) => ({
     ),
 }));
 
+const totalTimeSpent = trackingService.totalTimeExercisedLastWeek;
+
 export default function WorkoutTimeChart() {
   const font = useFont(SpaceGrotesk, 12);
 
   return (
     <View>
       <Text style={typography.titleBase}>Time spent</Text>
-      <View style={{ height: 240, marginVertical: 16 }}>
-        <CartesianChart
-          padding={{ right: 16 }}
-          domainPadding={{
-            left: 48,
-            right: 48,
-          }}
-          data={data}
-          xKey="day"
-          yKeys={["workout_time"]}
-          axisOptions={{
-            font,
-            formatXLabel: (val) => val.substring(0, 3),
-            formatYLabel: (val) =>
-              val > 60 ? `${Math.floor(val / 60)}h${val % 60}m` : `${val}m`,
-            axisSide: { x: "bottom", y: "right" },
-            tickCount: 7,
-          }}
-        >
-          {({ points, chartBounds }) => (
-            <Bar
-              chartBounds={chartBounds} // 👈 chartBounds is needed to know how to draw the bars
-              points={points.workout_time} // 👈 points is an object with a property for each yKey
-              roundedCorners={{ topLeft: 4, topRight: 4 }}
-              color={colors.primary_70}
-            />
-          )}
-        </CartesianChart>
-      </View>
+      {totalTimeSpent > 0 ? (
+        <View style={{ height: 240, marginVertical: 16 }}>
+          <CartesianChart
+            padding={{ right: 16 }}
+            domainPadding={{
+              left: 48,
+              right: 48,
+            }}
+            data={data}
+            xKey="day"
+            yKeys={["workout_time"]}
+            axisOptions={{
+              font,
+
+              formatYLabel: (val) =>
+                val > 60 ? `${Math.floor(val / 60)}h${val % 60}m` : `${val}m`,
+              axisSide: { x: "bottom", y: "right" },
+              tickCount: 7,
+            }}
+          >
+            {({ points, chartBounds }) => (
+              <Bar
+                chartBounds={chartBounds} // 👈 chartBounds is needed to know how to draw the bars
+                points={points.workout_time} // 👈 points is an object with a property for each yKey
+                roundedCorners={{ topLeft: 4, topRight: 4 }}
+                color={colors.primary_70}
+              />
+            )}
+          </CartesianChart>
+        </View>
+      ) : (
+        <Text>No data</Text>
+      )}
     </View>
   );
 }
