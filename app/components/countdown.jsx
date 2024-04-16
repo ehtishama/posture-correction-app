@@ -4,6 +4,7 @@ import typography from "../styles/typography";
 import { colors } from "../styles/colors";
 import * as Progress from "react-native-progress";
 import { Audio } from "expo-av";
+import { LinearProgress } from "@rneui/themed";
 
 const ticSound = require("../../assets/sounds/tic.wav");
 const COUNTDOWN_DELAY = 1000;
@@ -19,6 +20,7 @@ const Countdown = ({
   reset,
   running = true,
   sound = false,
+  renderProgress = null,
 }) => {
   const [timeElapsed, setTimeElapsed] = useState(0);
 
@@ -48,18 +50,27 @@ const Countdown = ({
 
   return (
     <View style={styles.container}>
-      <Progress.Circle
-        progress={1 - (timeElapsed / duration).toFixed(2)}
-        color={colors.primary_30}
-        borderColor={colors.primary_1}
-        size={180}
-        borderWidth={8}
-        thickness={8}
-        showsText
-        strokeCap="round"
-        formatText={() => duration - timeElapsed}
-        textStyle={typography.titleXLarge}
-      />
+      {
+        // render custom progress bar
+        renderProgress ? (
+          renderProgress({
+            progress: 1 - (timeElapsed / duration).toFixed(2),
+          })
+        ) : (
+          <Progress.Circle
+            progress={1 - (timeElapsed / duration).toFixed(2)}
+            color={colors.primary_30}
+            borderColor={colors.primary_1}
+            size={180}
+            borderWidth={8}
+            thickness={8}
+            showsText
+            strokeCap="round"
+            formatText={() => duration - timeElapsed}
+            textStyle={typography.titleXLarge}
+          />
+        )
+      }
     </View>
   );
 };
@@ -67,5 +78,11 @@ const Countdown = ({
 export default Countdown;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: "100%",
+    alignItems: "center",
+    
+    
+    
+  },
 });

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { colors } from "../styles/colors";
 
 export const ListHeader = () => {
   return (
@@ -11,14 +12,15 @@ export const ListHeader = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    margin: 16,
+    paddingVertical: 8,
+    marginTop: 32,
     borderBottomWidth: 2,
-    borderColor: "black",
-    marginVertical: 16,
-    backgroundColor: "white",
   },
   title: {
     fontWeight: "700",
+
     fontSize: 20,
+    textTransform: "uppercase",
   },
 });

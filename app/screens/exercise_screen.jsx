@@ -17,6 +17,9 @@ import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
+import { LinearProgress } from "@rneui/themed";
+import typography from "../styles/typography";
+import LinearProgressText from "../components/LinearProgressText";
 
 const playExerciseMessage = (onDone, isFirstExercise = false) => {
   let message;
@@ -74,7 +77,7 @@ export default function ExerciseScreen() {
   // Starts the exercise countdown on navigations, and idx change
   // If idx 0, play first exercise message
   useEffect(() => {
-    // return; // temporarily disable auto start
+    return; // temporarily disable auto start
 
     if (isSilent) startExercise();
     else playExerciseMessage(startExercise, currExerciseIdx == 0);
@@ -120,6 +123,15 @@ export default function ExerciseScreen() {
           // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
           reset={currExerciseModel}
           running={!isPause}
+          renderProgress={
+            /* custom progress bar */
+            ({ progress }) => (
+              <LinearProgressText
+                progress={progress}
+                text={(progress * duration).toFixed(0) + "s"}
+              />
+            )
+          }
         />
       </View>
 

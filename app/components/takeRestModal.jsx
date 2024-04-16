@@ -25,7 +25,7 @@ const TakeRestModal = ({ onRestComplete, isSilent }) => {
       setCountdownRunning(true);
     } else {
       Speech.speak(
-        "It's time to take some rest. The 10 seconds rest count down will start now.",
+        "It's time to take some rest. The rest count down will start now.",
         {
           onDone: () => setCountdownRunning(true),
         }

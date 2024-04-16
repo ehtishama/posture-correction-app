@@ -3,9 +3,15 @@ import React from "react";
 import typography from "../styles/typography";
 
 export const Hero = () => {
+  const hours = new Date().getHours();
+
+  const message = `Good ${
+    hours < 12 ? "morning" : hours < 18 ? "afternoon" : "evening"
+  }`;
+
   return (
     <View style={styles.container}>
-      <Text style={typography.titleXLarge}>Good Morning!</Text>
+      <Text style={typography.titleXLarge}>{`${message}!`}</Text>
     </View>
   );
 };
@@ -13,7 +19,6 @@ export const Hero = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    // backgroundColor: "red",
-    marginVertical: 12,
+    marginVertical: 8,
   },
 });

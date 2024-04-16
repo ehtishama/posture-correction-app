@@ -8,12 +8,12 @@ import ScreenLayout from "../screen_layout";
 import { tracks } from "../../data";
 import { TrackItem } from "../../components/trackItem";
 import { getTrackDuration } from "../../data/utils";
+import { LinearProgress } from "@rneui/themed";
 
 export default function HomeScreen() {
   return (
     <ScreenLayout>
       <View style={styles.container}>
-        <StatusBar translucent={true} />
         <Header />
 
         {/* tracks list */}
