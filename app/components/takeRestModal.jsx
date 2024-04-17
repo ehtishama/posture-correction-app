@@ -1,11 +1,4 @@
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import Countdown from "./countdown";
 import Button from "./button";
@@ -17,21 +10,19 @@ import * as Speech from "expo-speech";
 const TakeRestModal = ({ onRestComplete, isSilent }) => {
   const [countdownRunning, setCountdownRunning] = useState(false);
 
+  //
   useEffect(() => {
-    if (countdownRunning) return;
-
     if (isSilent) {
       Speech.stop();
       setCountdownRunning(true);
     } else {
-      Speech.speak(
-        "Take Rest.",
-        {
-          onDone: () => setCountdownRunning(true),
-        }
-      );
+      Speech.speak("Take Rest.", {
+        onDone: () => setCountdownRunning(true),
+      });
     }
-  }, [countdownRunning]);
+
+    return Speech.stop;
+  }, []);
 
   return (
     <Modal visible={true}>
@@ -48,7 +39,7 @@ const TakeRestModal = ({ onRestComplete, isSilent }) => {
           <Text style={typography.titleLarge}>Take Rest</Text>
           <Text style={[typography.bodyBase, { textAlign: "center" }]}>
             Well Done! now take some well deserved rest. The next exercise will
-            start in a few seconds.
+            shortly after.
           </Text>
         </View>
         <Countdown
