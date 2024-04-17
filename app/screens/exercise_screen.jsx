@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ExerciseDemoCard } from "../components/exerciseDemoCard";
 import Button from "../components/button";
@@ -75,7 +75,7 @@ export default function ExerciseScreen() {
   // Starts the exercise countdown on navigations, and idx change
   // If idx 0, play first exercise message
   useEffect(() => {
-    return; // temporarily disable auto start
+    // return; // temporarily disable auto start
 
     if (isSilent) startExercise();
     else playExerciseMessage(startExercise, currExerciseIdx == 0);
@@ -90,7 +90,10 @@ export default function ExerciseScreen() {
         onInfoClick={handleInfoClick}
       />
 
-      <View style={styles.content}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        style={{ flexGrow: 1 }}
+      >
         {currExerciseModel.instructions.map((item, idx) => (
           <View
             key={idx}
@@ -102,10 +105,10 @@ export default function ExerciseScreen() {
               color={colors.primary_60}
             />
 
-            <Text>{item}</Text>
+            <Text style={{ flexShrink: 1 }}>{item}</Text>
           </View>
         ))}
-      </View>
+      </ScrollView>
 
       <View
         style={{
@@ -192,8 +195,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   content: {
-    padding: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 20,
     gap: 12,
+    backgroundColor: colors.primary_10,
+    flexGrow: 1,
+    borderRadius: 8,
   },
   title: {
     textAlign: "center",

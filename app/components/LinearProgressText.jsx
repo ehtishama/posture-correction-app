@@ -11,7 +11,7 @@ export default function LinearProgressText({ progress, text }) {
       <LinearProgress
         value={progress}
         color={colors.primary_30}
-        style={{ height: 56 }}
+        style={{ height: 56, borderRadius: 4 }}
         animation={{ duration: 500 }}
       />
     </View>
