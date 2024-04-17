@@ -1,7 +1,7 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+
 import ScreenLayout from "../screen_layout";
 import WeeklyStreak from "../../components/weeklyStreak";
-
 import { colors } from "../../styles/colors";
 import typography from "../../styles/typography";
 import WorkoutTimeChart from "../../components/WorkoutTimeChart";

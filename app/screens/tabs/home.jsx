@@ -13,6 +13,7 @@ import { LinearProgress } from "@rneui/themed";
 export default function HomeScreen() {
   return (
     <ScreenLayout>
+      <StatusBar style="dark" translucent={false} />
       <View style={styles.container}>
         <Header />
 

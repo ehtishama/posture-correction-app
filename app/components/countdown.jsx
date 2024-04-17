@@ -4,15 +4,11 @@ import typography from "../styles/typography";
 import { colors } from "../styles/colors";
 import * as Progress from "react-native-progress";
 import { Audio } from "expo-av";
-import { LinearProgress } from "@rneui/themed";
 
 const ticSound = require("../../assets/sounds/tic.wav");
-const COUNTDOWN_DELAY = 1000;
+const bellSound = require("../../assets/sounds/bike-bell-ring.wav");
 
-async function playTicSound() {
-  const { sound } = await Audio.Sound.createAsync(ticSound);
-  await sound.playAsync();
-}
+const COUNTDOWN_DELAY = 1000;
 
 const Countdown = ({
   duration,
@@ -23,6 +19,25 @@ const Countdown = ({
   renderProgress = null,
 }) => {
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const [soundObject, setSoundObject] = useState(null);
+
+  async function playTicSound() {
+    console.log("Loading Sound");
+    const { sound } = await Audio.Sound.createAsync(ticSound);
+    setSoundObject(sound);
+
+    console.log("Playing Sound 1");
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    return soundObject
+      ? () => {
+          soundObject.unloadAsync();
+          console.log("Sound Unloaded");
+        }
+      : undefined;
+  }, [soundObject]);
 
   // reset timer
   useEffect(() => {
@@ -33,6 +48,9 @@ const Countdown = ({
     if (!running) return;
 
     if (timeElapsed >= duration) {
+      // play countdown completed sound
+      Audio.Sound.createAsync(bellSound, { shouldPlay: true });
+
       onCompleted && onCompleted();
       return;
     }
@@ -81,8 +99,5 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
-    
-    
-    
   },
 });

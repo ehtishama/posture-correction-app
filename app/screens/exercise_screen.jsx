@@ -17,8 +17,6 @@ import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
-import { LinearProgress } from "@rneui/themed";
-import typography from "../styles/typography";
 import LinearProgressText from "../components/LinearProgressText";
 
 const playExerciseMessage = (onDone, isFirstExercise = false) => {
@@ -132,6 +130,7 @@ export default function ExerciseScreen() {
               />
             )
           }
+          sound
         />
       </View>
 
