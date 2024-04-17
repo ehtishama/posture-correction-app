@@ -19,16 +19,22 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import LinearProgressText from "../components/LinearProgressText";
 
-const playExerciseMessage = (onDone, isFirstExercise = false) => {
+const playExerciseMessage = (
+  onDone,
+  isFirstExercise = false,
+  exerciseName = ""
+) => {
+  Speech.stop();
+
   let message;
   if (!isFirstExercise)
-    message = "Get ready for your next exercise. The countdown will start now.";
+    message = `You will now do ${exerciseName}. The countdown will start now`;
   else
-    message = "Get ready for your first exercise. The countdown will start now";
+    message = `Let's start with ${exerciseName} pose. The countdown will start in 3, 2, 1.`;
 
-  Speech.stop();
   Speech.speak(message, {
     onDone,
+    volume: 0.5,
   });
 };
 
@@ -72,7 +78,7 @@ export default function ExerciseScreen() {
       setCurrExerciseIdx((exerciseIdx) => exerciseIdx - 1);
   };
 
-  // Starts the exercise countdown on navigations, and idx change
+  // Starts the exercise countdown on navigations, and idx changes
   // If idx 0, play first exercise message
   useEffect(() => {
     // return; // temporarily disable auto start
@@ -80,7 +86,12 @@ export default function ExerciseScreen() {
     setIsPause(true); // pause the countdown whenever the exercise changes
 
     if (isSilent) startExercise();
-    else playExerciseMessage(startExercise, currExerciseIdx == 0);
+    else
+      playExerciseMessage(
+        startExercise,
+        currExerciseIdx == 0,
+        currExerciseModel.title
+      );
   }, [currExerciseIdx]);
 
   return (
