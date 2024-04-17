@@ -92,6 +92,11 @@ export default function ExerciseScreen() {
         currExerciseIdx == 0,
         currExerciseModel.title
       );
+
+    // cleanup
+    return () => {
+      Speech.stop();
+    };
   }, [currExerciseIdx]);
 
   return (
