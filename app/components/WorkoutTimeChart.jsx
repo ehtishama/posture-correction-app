@@ -29,7 +29,7 @@ const data = datetimeUtils.getLast7Days().map((x) => ({
     ),
 }));
 
-const totalTimeSpent = trackingService.totalTimeExercisedLastWeek;
+const totalTimeSpent = trackingService.totalTimeExercisedLastWeek();
 
 export default function WorkoutTimeChart() {
   const font = useFont(SpaceGrotesk, 12);

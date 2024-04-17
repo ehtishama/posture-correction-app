@@ -77,6 +77,8 @@ export default function ExerciseScreen() {
   useEffect(() => {
     // return; // temporarily disable auto start
 
+    setIsPause(true); // pause the countdown whenever the exercise changes
+
     if (isSilent) startExercise();
     else playExerciseMessage(startExercise, currExerciseIdx == 0);
   }, [currExerciseIdx]);
