@@ -29,7 +29,6 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme=""/>
         <data android:scheme="com.ehtishamhassan9.postureperfect"/>
-        <data android:scheme=""/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
