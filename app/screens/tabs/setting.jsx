@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import ScreenLayout from "../screen_layout";
 import typography from "../../styles/typography";
 import { colors } from "../../styles/colors";
@@ -13,8 +13,20 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Spacer from "../../components/spacer";
 import { STACK_ROUTES } from "../../navigation/Routes";
 import { useNavigation } from "@react-navigation/native";
+import { SetReminderModal } from "../../components/modals/SetReminderModal";
 
 const SECTIONS = [
+  {
+    header: "Notifications",
+    items: [
+      {
+        type: "modal",
+        label: "Reminder Notifications",
+        icon: "bell-outline",
+        modal: SetReminderModal,
+      },
+    ],
+  },
   {
     header: "Support",
     items: [
@@ -57,12 +69,21 @@ export default function SettingScreen() {
 }
 
 const SettingItem = ({ item, isLast }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const isLink = item.type === "link";
 
   const handlePress = () => {
-    if (isLink) {
-      navigation.navigate(item.route);
+    switch (item.type) {
+      case "modal":
+        console.log("modal");
+        setModalVisible(true);
+        break;
+      case "link":
+        navigation.navigate(item.route);
+        break;
+      default:
+        console.log("default setting item pressed");
     }
   };
 
@@ -78,8 +99,14 @@ const SettingItem = ({ item, isLast }) => {
             style={{ marginLeft: "auto" }}
           />
         )}
+
+        {item.type === "modal" && (
+          <item.modal
+            visible={modalVisible}
+            toggleModal={() => setModalVisible(!modalVisible)}
+          />
+        )}
       </TouchableOpacity>
-      {!isLast && <View style={styles.divider} />}
     </View>
   );
 };
@@ -98,7 +125,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary_1,
     padding: 16,
     flexDirection: "row",
-    gap: 2,
+    gap: 8,
+    borderRadius: 8,
+    marginBottom: 8,
   },
   section_header: {
     color: "#0008",
