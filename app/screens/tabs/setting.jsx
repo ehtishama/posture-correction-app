@@ -21,7 +21,7 @@ const SECTIONS = [
     items: [
       {
         type: "modal",
-        label: "Reminder Notifications",
+        label: "Daily Workout Reminder",
         icon: "bell-outline",
         modal: SetReminderModal,
       },
@@ -76,7 +76,6 @@ const SettingItem = ({ item, isLast }) => {
   const handlePress = () => {
     switch (item.type) {
       case "modal":
-        console.log("modal");
         setModalVisible(true);
         break;
       case "link":

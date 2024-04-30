@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 notifee.onBackgroundEvent(async ({ type, detail }) => {
   const { notification } = detail;
 
-  // Check if the user pressed the "Mark as read" action
+  // Check if the user pressed notification when the app is in background
   if (type === EventType.PRESS) {
     console.log("onBackgroundEvent: Notification Pressed");
 
@@ -32,6 +32,7 @@ notifee.onForegroundEvent(async ({ type, detail }) => {
 export default function App() {
   const [loading, setLoading] = useState(true);
 
+  // Check if the app was opened by a notification
   async function bootstrap() {
     const initialNotification = await notifee.getInitialNotification();
 
