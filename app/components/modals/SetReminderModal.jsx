@@ -8,7 +8,7 @@ import DatePicker from "react-native-date-picker";
 import { format } from "date-fns";
 
 export const SetReminderModal = ({ visible, toggleModal }) => {
-  const [date, setDate] = useState(new Date(Date.now()));
+  const [date, setDate] = useState(new Date());
 
   const handleUpdateReminder = async () => {
     // cancel all trigger notifications
@@ -18,7 +18,6 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       id: "default",
       name: "Default Channel",
     });
-
 
     // if the date is a past date add 1 day to it
     if (date < new Date(Date.now())) {
@@ -44,7 +43,8 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
 
     console.log(
       "Daily Workout Reminder set to:",
-      format(date, "hh:mm a"), "everyday."
+      format(date, "hh:mm a"),
+      "everyday."
     );
     toggleModal();
   };
@@ -62,8 +62,10 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       overlayStyle={styles.container}
     >
       <Text style={typography.titleLarge}>Set Reminder</Text>
-      <Text style={typography.body}>What time would you like to be reminded everyday?</Text>
-      <DatePicker date={date} onDateChange={setDate} mode="time" />
+      <Text style={typography.body}>
+        What time would you like to be reminded everyday?
+      </Text>
+      <DatePicker date={date} onDateChange={setDate} mode="time" theme="light"/>
       <View
         style={{
           flexDirection: "row",
