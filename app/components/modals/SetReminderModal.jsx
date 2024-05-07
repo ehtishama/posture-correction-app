@@ -1,10 +1,10 @@
+import notifee, { RepeatFrequency, TriggerType } from "@notifee/react-native";
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../button";
 import { Overlay } from "@rneui/themed";
 import typography from "../../styles/typography";
 import DatePicker from "react-native-date-picker";
-import notifee, { RepeatFrequency, TriggerType } from "@notifee/react-native";
 import { format } from "date-fns";
 
 export const SetReminderModal = ({ visible, toggleModal }) => {
