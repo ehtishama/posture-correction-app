@@ -12,11 +12,11 @@ import { getTrackDuration } from "../data/utils";
 
 const _data = [
   { day: "Sunday", workout_time: 60 },
-  { day: "Monday", workout_time: 10 },
-  { day: "Tuesday", workout_time: 0 },
-  { day: "Wednesday", workout_time: 30 },
-  { day: "Thursday", workout_time: 90 },
-  { day: "Friday", workout_time: 50 },
+  { day: "Monday", workout_time: 60 },
+  { day: "Tuesday", workout_time: 60 },
+  { day: "Wednesday", workout_time: 60 },
+  { day: "Thursday", workout_time: 60 },
+  { day: "Friday", workout_time: 60 },
 ];
 
 const data = datetimeUtils.getLast7Days().map((x) => ({
@@ -35,7 +35,7 @@ export default function WorkoutTimeChart() {
   const font = useFont(SpaceGrotesk, 12);
 
   return (
-    <View>
+    <View style={{ gap: 8 }}>
       <Text style={typography.titleBase}>Time spent</Text>
       {totalTimeSpent > 0 ? (
         <View style={{ height: 240, marginVertical: 16 }}>
@@ -50,7 +50,6 @@ export default function WorkoutTimeChart() {
             yKeys={["workout_time"]}
             axisOptions={{
               font,
-
               formatYLabel: (val) =>
                 val > 60 ? `${Math.floor(val / 60)}h${val % 60}m` : `${val}m`,
               axisSide: { x: "bottom", y: "right" },
@@ -68,7 +67,11 @@ export default function WorkoutTimeChart() {
           </CartesianChart>
         </View>
       ) : (
-        <Text>No data</Text>
+        <Text
+          style={[typography.bodyMedium, { textAlign: "center", padding: 16 }]}
+        >
+          You haven't worked out in the last 7 days. Start now! 🏋️‍♂ ️
+        </Text>
       )}
     </View>
   );
