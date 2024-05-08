@@ -6,6 +6,7 @@ import { Overlay } from "@rneui/themed";
 import typography from "../../styles/typography";
 import DatePicker from "react-native-date-picker";
 import { format } from "date-fns";
+import { storageService } from "../../services/storage";
 
 export const SetReminderModal = ({ visible, toggleModal }) => {
   const [date, setDate] = useState(new Date());
@@ -46,11 +47,15 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       format(date, "hh:mm a"),
       "everyday."
     );
+
+    storageService.set("dailyReminder", date.toISOString());
+
     toggleModal();
   };
 
   const handleRemoveReminder = async () => {
     await notifee.cancelTriggerNotifications();
+    storageService.delete("dailyReminder");
     console.log("Daily Workout Reminder removed");
     toggleModal();
   };
@@ -65,7 +70,12 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       <Text style={typography.body}>
         What time would you like to be reminded everyday?
       </Text>
-      <DatePicker date={date} onDateChange={setDate} mode="time" theme="light"/>
+      <DatePicker
+        date={date}
+        onDateChange={setDate}
+        mode="time"
+        theme="light"
+      />
       <View
         style={{
           flexDirection: "row",

@@ -6,6 +6,7 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import { format } from "date-fns";
 import ScreenLayout from "../screen_layout";
 import typography from "../../styles/typography";
 import { colors } from "../../styles/colors";
@@ -14,6 +15,7 @@ import Spacer from "../../components/spacer";
 import { STACK_ROUTES } from "../../navigation/Routes";
 import { useNavigation } from "@react-navigation/native";
 import { SetReminderModal } from "../../components/modals/SetReminderModal";
+import { storageService } from "../../services/storage";
 
 const SECTIONS = [
   {
@@ -21,9 +23,13 @@ const SECTIONS = [
     items: [
       {
         type: "modal",
-        label: "Daily Workout Reminder",
+        label: "Daily Reminder",
         icon: "bell-outline",
         modal: SetReminderModal,
+        secondaryText:
+          (storageService.exists("dailyReminder") &&
+            format(new Date(storageService.get("dailyReminder")), "hh:mm a")) ||
+          null,
       },
     ],
   },
@@ -91,6 +97,13 @@ const SettingItem = ({ item, isLast }) => {
       <TouchableOpacity style={styles.item} onPress={handlePress}>
         <MaterialCommunityIcons name={item.icon} size={24} />
         <Text style={typography.titleBase}>{item.label}</Text>
+
+        {item.secondaryText && (
+          <Text style={[typography.bodySmall, { marginLeft: "auto" }]}>
+            {item.secondaryText}
+          </Text>
+        )}
+
         {isLink && (
           <MaterialCommunityIcons
             name="chevron-right"
