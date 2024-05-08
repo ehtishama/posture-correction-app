@@ -29,9 +29,9 @@ export default function FeedbackScreen() {
   };
 
   return (
-    <ScreenLayout style={styles.container}>
+    <ScreenLayout style={styles.container} title={"Contact"} back>
       <Text style={typography.titleLarge}>Reach out now!</Text>
-      <Text>Got something to say? Use the form below to reach us out!</Text>
+      <Text>Got something to say? Use the form below to reach out!</Text>
       <Spacer space={8} />
       <TextInput
         placeholder="Email"
@@ -57,8 +57,9 @@ export default function FeedbackScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    gap: 4,
+    padding: 20,
+
+    gap: 12,
   },
   text_input: {
     padding: 12,

@@ -20,8 +20,9 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       name: "Default Channel",
     });
 
-    // if the date is a past date add 1 day to it
-    if (date < new Date(Date.now())) {
+    // if user chose a time before the current time
+    // set the reminder from the next day
+    if (date < new Date()) {
       date.setDate(date.getDate() + 1);
     }
 
@@ -48,6 +49,7 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       "everyday."
     );
 
+    // save the reminder time to storage
     storageService.set("dailyReminder", date.toISOString());
 
     toggleModal();

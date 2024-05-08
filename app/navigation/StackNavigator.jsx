@@ -35,6 +35,9 @@ export default function StackNavigator() {
       <Stack.Screen
         name={STACK_ROUTES.FEEDBACK_SCREEN}
         component={FeedbackScreen}
+        options={{
+          contentStyle: { backgroundColor: "white" },
+        }}
       />
     </Stack.Navigator>
   );
