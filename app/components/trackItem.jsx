@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/Routes";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import Animated from "react-native-reanimated";
@@ -14,6 +14,7 @@ export const TrackItem = ({
   numExercises,
   duration,
   thumbnail,
+  difficulty = 3,
 }) => {
   const navigation = useNavigation();
 
@@ -40,6 +41,11 @@ export const TrackItem = ({
               <MaterialIcons name="timer" size={16} />
               <Text>{Math.ceil(duration / 60)} mins</Text>
             </View>
+          </View>
+          <View style={[styles.row, { marginTop: 8 }]}>
+            {[...Array(difficulty)].map((_, i) => (
+              <MaterialCommunityIcons key={i} name="star-outline" size={16} />
+            ))}
           </View>
         </View>
         <Animated.Image style={styles.cardImage} source={thumbnail} />

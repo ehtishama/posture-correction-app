@@ -336,6 +336,7 @@ export const data = {
         { exercise_id: 11, duration: 30 },
         { exercise_id: 12, duration: 30 },
       ],
+      difficulty: 1,
     },
     {
       id: 2,
@@ -358,11 +359,12 @@ export const data = {
         { exercise_id: 14, duration: 45 },
         { exercise_id: 15, duration: 45 },
       ],
+      difficulty: 2,
     },
     {
       id: 3,
       title: "Advance",
-      thumbnail: require("../../assets/intermediate-plan.jpg"),
+      thumbnail: require("../../assets/advance-plan-2.jpg"),
       exercises: [
         { exercise_id: 1, duration: 60 },
         { exercise_id: 2, duration: 60 },
@@ -380,6 +382,7 @@ export const data = {
         { exercise_id: 14, duration: 60 },
         { exercise_id: 15, duration: 60 },
       ],
+      difficulty: 3,
     },
   ],
 };

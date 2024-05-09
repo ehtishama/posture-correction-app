@@ -8,11 +8,6 @@ import ScreenLayout from "../screen_layout";
 import { tracks } from "../../data";
 import { TrackItem } from "../../components/trackItem";
 import { getTrackDuration } from "../../data/utils";
-import {
-  BannerAd,
-  BannerAdSize,
-  TestIds,
-} from "react-native-google-mobile-ads";
 
 export default function HomeScreen() {
   return (
@@ -32,6 +27,7 @@ export default function HomeScreen() {
               numExercises={item.exercises.length}
               duration={getTrackDuration(item.id)}
               thumbnail={item.thumbnail}
+              difficulty={item.difficulty}
             />
           )}
           ListHeaderComponent={
