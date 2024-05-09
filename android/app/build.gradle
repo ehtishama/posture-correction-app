@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.ehtishamhassan9.postureperfect'
+    namespace 'com.shaam.postureperfect'
     defaultConfig {
-        applicationId 'com.ehtishamhassan9.postureperfect'
+        applicationId 'com.shaam.postureperfect'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

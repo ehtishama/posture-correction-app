@@ -4,6 +4,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import notifee, { EventType } from "@notifee/react-native";
 import { useEffect, useState } from "react";
+import mobileAds from "react-native-google-mobile-ads";
+
+// Initialize the Google Mobile Ads SDK
+mobileAds().initialize();
 
 notifee.onBackgroundEvent(async ({ type, detail }) => {
   const { notification } = detail;

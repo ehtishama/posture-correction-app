@@ -8,6 +8,11 @@ import ScreenLayout from "../screen_layout";
 import { tracks } from "../../data";
 import { TrackItem } from "../../components/trackItem";
 import { getTrackDuration } from "../../data/utils";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
 
 export default function HomeScreen() {
   return (
@@ -15,6 +20,13 @@ export default function HomeScreen() {
       <StatusBar style="dark" translucent={false} />
       <View style={styles.container}>
         <Header />
+
+        {/* <AdMobBanner /> */}
+        <BannerAd
+          unitId={TestIds.BANNER}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+          onAdFailedToLoad={(error) => console.error(error)}
+        />
 
         {/* tracks list */}
         <FlatList

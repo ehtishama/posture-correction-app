@@ -1,4 +1,4 @@
-package com.ehtishamhassan9.postureperfect;
+package com.shaam.postureperfect;
 
 import android.os.Build;
 import android.os.Bundle;

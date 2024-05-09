@@ -39,5 +39,8 @@ allprojects {
         maven {
             url "$rootDir/../node_modules/@notifee/react-native/android/libs" 
         }
+        maven {
+            url "$rootDir/../node_modules/@notifee/react-native/android/libs" 
+        }
     }
 }
