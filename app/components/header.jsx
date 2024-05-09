@@ -1,15 +1,13 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import typography from "../styles/typography";
 
 export const Header = () => {
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../assets/profile-placeholder.jpg")}
-        style={styles.profileImage}
-      />
+      <AntDesign name="user" size={24} color="white" />
+
       <Text style={typography.titleMedium}>Posture Perfect</Text>
       <MaterialCommunityIcons name="bell-outline" size={24} color="black" />
     </View>
