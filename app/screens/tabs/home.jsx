@@ -21,13 +21,6 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <Header />
 
-        {/* <AdMobBanner /> */}
-        <BannerAd
-          unitId={TestIds.BANNER}
-          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-          onAdFailedToLoad={(error) => console.error(error)}
-        />
-
         {/* tracks list */}
         <FlatList
           data={tracks}

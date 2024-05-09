@@ -8,6 +8,8 @@ import { colors } from "../styles/colors";
 import * as Speech from "expo-speech";
 import { getExerciseById } from "../data/utils";
 import ExerciseItem from "./exerciseItem";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import values from "../values";
 
 const TakeRestModal = ({
   onRestComplete,
@@ -19,7 +21,7 @@ const TakeRestModal = ({
 
   const exercise = getExerciseById(nextExerciseId);
 
-  // 
+  //
   useEffect(() => {
     if (isSilent) {
       Speech.stop();
@@ -78,6 +80,13 @@ const TakeRestModal = ({
         <Text style={[typography.titleBase, styles.badge]}>Next Exercise</Text>
         <ExerciseItem exercise_id={nextExerciseId} />
       </View>
+
+      {/* <AdMobBanner /> */}
+      <BannerAd
+        unitId={values.admob.banner}
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        onAdFailedToLoad={(error) => console.error(error)}
+      />
     </Modal>
   );
 };

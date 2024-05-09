@@ -10,6 +10,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { STACK_ROUTES } from "../navigation/Routes";
 import ScreenLayout from "./screen_layout";
 import BackButton from "../components/BackButton";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import values from "../values";
 
 const SessionScreen = () => {
   const navigation = useNavigation();
@@ -50,9 +52,22 @@ const SessionScreen = () => {
 
       <FlatList
         data={exercises}
-        renderItem={({ item }) => (
-          <ExerciseItem key={item.exercise_id} {...item} />
-        )}
+        renderItem={({ item, index }) => {
+          if (index % 10 === 0)
+            return (
+              <>
+                {/* <AdMobBanner /> */}
+                <BannerAd
+                  unitId={values.admob.banner}
+                  size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                  onAdFailedToLoad={(error) => console.error(error)}
+                />
+                <ExerciseItem key={item.exercise_id} {...item} />
+              </>
+            );
+
+          return <ExerciseItem key={item.exercise_id} {...item} />;
+        }}
         contentContainerStyle={{
           paddingBottom: 96,
         }}
