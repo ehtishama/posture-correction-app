@@ -18,6 +18,7 @@ import BottomSheet, {
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
 import LinearProgressText from "../components/LinearProgressText";
+import ExerciseItem from "../components/exerciseItem";
 
 const playExerciseMessage = (
   onDone,
@@ -181,6 +182,7 @@ export default function ExerciseScreen() {
             nextExercise();
           }}
           isSilent={isSilent}
+          nextExerciseId={exercises[currExerciseIdx + 1]?.exercise_id}
         />
       )}
 

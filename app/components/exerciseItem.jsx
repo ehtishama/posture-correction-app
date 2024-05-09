@@ -16,12 +16,16 @@ const ExerciseItem = ({ exercise_id, duration, repetitions }) => {
       <View style={styles.content}>
         <Text style={typography.titleMedium}>{exercise.title}</Text>
         <View style={styles.desc}>
-          <MaterialCommunityIcons
-            name="clock-outline"
-            size={20}
-            color="black"
-          />
-          <Text>{duration}s</Text>
+          {duration && (
+            <>
+              <MaterialCommunityIcons
+                name="clock-outline"
+                size={20}
+                color="black"
+              />
+              <Text>{duration}s</Text>
+            </>
+          )}
         </View>
       </View>
     </View>

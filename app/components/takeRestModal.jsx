@@ -6,22 +6,45 @@ import typography from "../styles/typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../styles/colors";
 import * as Speech from "expo-speech";
+import { getExerciseById } from "../data/utils";
+import ExerciseItem from "./exerciseItem";
 
-const TakeRestModal = ({ onRestComplete, isSilent }) => {
+const TakeRestModal = ({
+  onRestComplete,
+  isSilent,
+  nextExerciseId,
+  restDuration = 30,
+}) => {
   const [countdownRunning, setCountdownRunning] = useState(false);
 
-  //
+  const exercise = getExerciseById(nextExerciseId);
+
+  // 
   useEffect(() => {
     if (isSilent) {
       Speech.stop();
       setCountdownRunning(true);
     } else {
-      Speech.speak("Take Rest.", {
+      Speech.speak(`Take rest for ${restDuration} second.`, {
         onDone: () => setCountdownRunning(true),
       });
     }
 
     return Speech.stop;
+  }, []);
+
+  // effect that runs after X seconds
+  useEffect(() => {
+    if (!nextExerciseId) return;
+
+    const timeout = setTimeout(() => {
+      Speech.speak(`Your next exercise is ${exercise.title}.`);
+    }, 10 * 1000);
+
+    return () => {
+      clearTimeout(timeout);
+      Speech.stop();
+    };
   }, []);
 
   return (
@@ -39,15 +62,21 @@ const TakeRestModal = ({ onRestComplete, isSilent }) => {
           <Text style={typography.titleLarge}>Take Rest</Text>
           <Text style={[typography.bodyBase, { textAlign: "center" }]}>
             Well Done! now take some well deserved rest. The next exercise will
-            shortly after.
+            start shortly after.
           </Text>
         </View>
         <Countdown
-          duration={30}
+          duration={restDuration}
           onCompleted={onRestComplete}
           running={countdownRunning}
         />
+
         <Button onPress={onRestComplete} text="Skip Rest" />
+      </View>
+
+      <View style={styles.footer}>
+        <Text style={[typography.titleBase, styles.badge]}>Next Exercise</Text>
+        <ExerciseItem exercise_id={nextExerciseId} />
       </View>
     </Modal>
   );
@@ -75,5 +104,22 @@ const styles = StyleSheet.create({
     color: colors.primary_50,
     padding: 8,
     borderRadius: 4,
+  },
+  footer: {
+    position: "relative",
+    padding: 16,
+  },
+  badge: {
+    backgroundColor: colors.primary_10,
+    borderRadius: 999,
+    color: colors.primary_70,
+    width: 100,
+    textAlign: "center",
+    fontSize: 12,
+    position: "absolute",
+    //top: 40,
+    right: 16,
+    bottom: 20,
+    zIndex: 1,
   },
 });
