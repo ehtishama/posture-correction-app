@@ -24,7 +24,9 @@ export const TrendCard = () => {
         </Pressable>
         */}
       </View>
-      <Text style={typography.titleMedium}>Great Job</Text>
+      <Text style={typography.titleMedium}>
+        {timeExcercised === 0 ? "Start now" : "Great Job"}
+      </Text>
       <Text style={typography.bodyBase}>
         {`You exercised for ${Math.ceil(
           timeExcercised / 60
