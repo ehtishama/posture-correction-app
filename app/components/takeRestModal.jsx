@@ -51,6 +51,8 @@ const TakeRestModal = ({
 
   return (
     <Modal visible={true}>
+      {/*
+
       <TouchableOpacity onPress={onRestComplete}>
         <MaterialCommunityIcons
           name="close"
@@ -59,6 +61,9 @@ const TakeRestModal = ({
           style={styles.closeButton}
         />
       </TouchableOpacity>
+      
+      */}
+
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={typography.titleLarge}>Take Rest</Text>

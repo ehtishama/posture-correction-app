@@ -17,9 +17,12 @@ export const TrendCard = () => {
           size={24}
           color="black"
         />
+        {/**
+         * 
         <Pressable>
           <MaterialCommunityIcons name="close" size={24} color="black" />
         </Pressable>
+        */}
       </View>
       <Text style={typography.titleMedium}>Great Job</Text>
       <Text style={typography.bodyBase}>

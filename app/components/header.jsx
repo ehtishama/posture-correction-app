@@ -6,10 +6,16 @@ import typography from "../styles/typography";
 export const Header = () => {
   return (
     <View style={styles.container}>
+      {/* 
+      
       <AntDesign name="user" size={24} color="white" />
+      */}
 
       <Text style={typography.titleMedium}>Posture Perfect</Text>
-      <MaterialCommunityIcons name="bell-outline" size={24} color="black" />
+      {/*
+      
+      <MaterialCommunityIcons name="bell-outline" size={24} color="white" />
+       */}
     </View>
   );
 };

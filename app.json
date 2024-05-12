@@ -11,7 +11,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -25,8 +27,15 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["./plugins/notifee-mod.js"],
-    "scheme": ""
+    "plugins": [
+      "./plugins/notifee-mod.js"
+    ],
+    "scheme": "",
+    "extra": {
+      "eas": {
+        "projectId": "a342a941-c3ba-4193-95b7-174779f3e4c9"
+      }
+    }
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-2799544456488571~6432164833"
