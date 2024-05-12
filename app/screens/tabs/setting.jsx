@@ -36,7 +36,12 @@ const SECTIONS = [
   {
     header: "Support",
     items: [
-      { type: "link", label: "Report an Issue", icon: "bug-outline" },
+      {
+        type: "link",
+        label: "Report an Issue",
+        icon: "bug-outline",
+        route: STACK_ROUTES.FEEDBACK_SCREEN,
+      },
       {
         type: "link",
         label: "Contact us",
