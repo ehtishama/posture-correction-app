@@ -6,8 +6,17 @@ import { colors } from "../styles/colors";
 import Spacer from "../components/spacer";
 import typography from "../styles/typography";
 import { useFormspark } from "@formspark/use-formspark";
+import * as yup from "yup";
 
 const FORMSPARK_FORM_ID = "fGCMTHwW7";
+
+const feedbackSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("You must enter a valid email!")
+    .required("Email is required!"),
+  message: yup.string().required("You need to write something!"),
+});
 
 export default function FeedbackScreen() {
   const [submit, submitting] = useFormspark({
@@ -18,16 +27,27 @@ export default function FeedbackScreen() {
   const [message, setMessage] = useState();
 
   const handleSend = async () => {
-    if (email && message) {
-      await submit({ email, message });
-      Alert.alert(
-        "Message Sent",
-        "Thanks for valueable feedback. We'll be looking into it soon, and get back to you",
-        [{ text: "OK" }]
-      );
+    try {
+      await feedbackSchema.validate({ email, message });
+    } catch (err) {
+      Alert.alert("Error", err.message, [{ text: "OK" }]);
+      return;
     }
+
+    await submit({ email, message });
+    Alert.alert(
+      "Message Sent",
+      "Thank you for your valuable feedback. We will carefully review it and respond to you shortly.",
+      [{ text: "OK" }]
+    );
+
+    clearForm();
   };
 
+  const clearForm = () => {
+    setEmail("");
+    setMessage("");
+  };
   return (
     <ScreenLayout style={styles.container} title={"Contact"} back>
       <Text style={typography.titleLarge}>Reach out now!</Text>
