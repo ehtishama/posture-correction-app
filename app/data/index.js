@@ -239,7 +239,7 @@ export const data = {
         "Rest your forehead on the ground and relax your entire body.",
         "Hold the pose and breathe deeply for several breaths.",
       ],
-      demo_poses: [],
+      demo_poses: [require("../../assets/exercises/childs-pose/pose_1.svg")],
     },
     {
       id: 13,
