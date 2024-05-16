@@ -138,7 +138,15 @@ export default function ExerciseScreen() {
       >
         <Countdown
           duration={duration}
-          onCompleted={() => setIsRestModalVisible(true)}
+          onCompleted={() => {
+            // if not last exercise
+            if (currExerciseIdx + 1 < exercises.length)
+              setIsRestModalVisible(true);
+            else
+              navigation.replace(STACK_ROUTES.SESSION_COMPLETE_SCREEN, {
+                trackId,
+              });
+          }}
           // reset the countdown when the current exercise changes
           // 🔴 TODO :: (A better approach is to use seprate countdowns for each exercise, on exercise change destroy the current countdown, create new one)
           reset={currExerciseModel}

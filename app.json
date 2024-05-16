@@ -2,7 +2,7 @@
   "expo": {
     "name": "Posture Fix",
     "slug": "posture-fix",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -22,14 +20,13 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.shaam.postureperfect"
+      "package": "com.shaam.postureperfect",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "./plugins/notifee-mod.js"
-    ],
+    "plugins": ["./plugins/notifee-mod.js"],
     "scheme": "",
     "extra": {
       "eas": {
