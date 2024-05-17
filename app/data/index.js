@@ -182,7 +182,10 @@ export const data = {
         "Hold for a moment, then lower back down with control.",
         "Repeat for desired repetitions.",
       ],
-      demo_poses: [],
+      demo_poses: [
+        require("../../assets/exercises/prone-back/pose_1.svg"),
+        require("../../assets/exercises/prone-back/pose_2.svg"),
+      ],
     },
     {
       id: 10,
