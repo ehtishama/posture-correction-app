@@ -52,8 +52,9 @@ export default function WorkoutTimeChart() {
               font,
               formatYLabel: (val) =>
                 val > 60 ? `${Math.floor(val / 60)}h${val % 60}m` : `${val}m`,
+              formatXLabel: (val) => val || "",
               axisSide: { x: "bottom", y: "right" },
-              tickCount: 7,
+              tickCount: { x: 6, y: 7 },
             }}
           >
             {({ points, chartBounds }) => (
