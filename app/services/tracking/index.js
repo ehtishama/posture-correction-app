@@ -51,8 +51,8 @@ class TrackingService {
    */
   getAllCompletedWorkouts() {
     if (this.storage.exists("completed_workouts"))
-      return this.storage.get("completed_workouts");
-    else return [];
+      return this.storage.get("completed_workouts") || [];
+    return [];
   }
 
   /**

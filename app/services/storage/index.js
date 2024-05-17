@@ -19,7 +19,14 @@ class Storage {
 
   get(key) {
     if (this.exists(key)) {
-      return JSON.parse(this.storage.getString(key));
+      try {
+        return JSON.parse(this.storage.getString(key));
+      } catch (error) {
+        console.error("There was an error parsing JSON", error);
+        console.log("Deleting key: ", key);
+        this.delete(key);
+        return null;
+      }
     }
     throw new Error(`Trying to access value for a non-existent key '${key}'`);
   }
