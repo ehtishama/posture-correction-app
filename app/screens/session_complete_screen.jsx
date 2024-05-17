@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import LottieView from "lottie-react-native";
 import typography from "../styles/typography";
 import Button from "../components/button";
 import { colors } from "../styles/colors";
@@ -10,6 +10,8 @@ import trackingService from "../services/tracking";
 const SessionCompleteScreen = () => {
   const navigation = useNavigation();
   const { params } = useRoute();
+  const animation = React.useRef(null);
+  const [animationFinished, setAnimationFinished] = useState(false);
 
   const trackId = params?.trackId;
 
@@ -31,12 +33,28 @@ const SessionCompleteScreen = () => {
 
   return (
     <View style={styles.container}>
+      {!animationFinished && (
+        <LottieView
+          autoPlay
+          loop={false}
+          ref={animation}
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            zIndex: 1,
+          }}
+          source={require("../../assets/lottie-animations/confetti.json")}
+          onAnimationFinish={() => setAnimationFinished(true)}
+        />
+      )}
+
       <View style={styles.content}>
         <Text style={typography.titleLarge}>Congratulations !</Text>
 
-        <Text style={typography.bodyBase}>
-          You've completed the session for today. Come back later for another
-          quick session.
+        <Text style={[typography.bodyBase, { textAlign: "center" }]}>
+          Great job completing your workout! Take a break and come back later
+          for another quick session. Keep up the good work!
         </Text>
         <Button text="OK" onPress={() => navigation.popToTop()} />
       </View>
@@ -50,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primary_10,
-    padding: 16,
+    padding: 20,
     justifyContent: "center",
   },
   content: {
