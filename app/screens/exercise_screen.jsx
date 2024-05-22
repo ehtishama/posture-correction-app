@@ -169,7 +169,13 @@ export default function ExerciseScreen() {
           <Feather name="arrow-left" size={24} color="black" />
         </Button>
 
-        <Button primary onPress={() => setIsPause((x) => !x)}>
+        <Button
+          primary
+          onPress={() => {
+            Speech.stop();
+            setIsPause((x) => !x);
+          }}
+        >
           {isPause ? (
             <Feather name="play" size={24} color="black" />
           ) : (
