@@ -223,7 +223,10 @@ export const data = {
         "Slide your arms up the wall as far as you can while keeping your elbows and wrists in contact with the wall.",
         "Return to the starting position and repeat for desired repetitions.",
       ],
-      demo_poses: [],
+      demo_poses: [
+        require("../../assets/exercises/wall-angels/pose_1.svg"),
+        require("../../assets/exercises/wall-angels/pose_2.svg"),
+      ],
     },
     {
       id: 12,
