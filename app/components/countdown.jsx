@@ -22,11 +22,9 @@ const Countdown = ({
   const [soundObject, setSoundObject] = useState(null);
 
   async function playTicSound() {
-    console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(ticSound);
     setSoundObject(sound);
 
-    console.log("Playing Sound 1");
     await sound.playAsync();
   }
 
@@ -34,7 +32,6 @@ const Countdown = ({
     return soundObject
       ? () => {
           soundObject.unloadAsync();
-          console.log("Sound Unloaded");
         }
       : undefined;
   }, [soundObject]);
