@@ -8,42 +8,17 @@ import DatePicker from "react-native-date-picker";
 import { format } from "date-fns";
 import { storageService } from "../../services/storage";
 import { updateReminderTime, useAppContext } from "../../context/AppContext";
+import { setDailyNotification } from "../../utils/notifications";
 
 export const SetReminderModal = ({ visible, toggleModal }) => {
   const [date, setDate] = useState(new Date());
   const { dispatch } = useAppContext();
 
   const handleUpdateReminder = async () => {
-    // cancel all trigger notifications
+    // cancel all other trigger notifications
     await notifee.cancelTriggerNotifications();
 
-    const channelId = await notifee.createChannel({
-      id: "default",
-      name: "Default Channel",
-    });
-
-    // if user chose a time before the current time
-    // set the reminder from the next day
-    if (date < new Date()) {
-      date.setDate(date.getDate() + 1);
-    }
-
-    const trigger = {
-      type: TriggerType.TIMESTAMP,
-      timestamp: date.getTime(),
-      repeatFrequency: RepeatFrequency.DAILY,
-    };
-
-    await notifee.createTriggerNotification(
-      {
-        title: "Workout Reminder",
-        body: "Got time for a quick workout to fix your back?",
-        android: {
-          channelId,
-        },
-      },
-      trigger
-    );
+    await setDailyNotification(date);
 
     // updating app context
     dispatch(updateReminderTime(date));

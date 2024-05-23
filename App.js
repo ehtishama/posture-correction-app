@@ -6,6 +6,8 @@ import notifee, { EventType } from "@notifee/react-native";
 import { useEffect, useState } from "react";
 import mobileAds from "react-native-google-mobile-ads";
 import { AppContextProvider } from "./app/context/AppContext";
+import { storageService } from "./app/services/storage";
+import { setDailyNotification } from "./app/utils/notifications";
 
 // Initialize the Google Mobile Ads SDK
 mobileAds().initialize();
@@ -50,6 +52,23 @@ export default function App() {
         "Press action used to open the app",
         initialNotification.pressAction
       );
+    }
+
+    // if the app is launched for the first time
+    if (!storageService.exists("alreadyLaunched")) {
+      storageService.set("alreadyLaunched", true);
+
+      // set the reminder time to 8:00 AM
+      const date = new Date();
+      date.setHours(8, 0, 0, 0);
+
+      // save the reminder time to storage
+      await setDailyNotification(date);
+
+      storageService.set("dailyReminder", date.toISOString());
+
+      console.log("App Launched for the first time.");
+      console.log("Daily Workout Reminder set 8:00 AM everyday.");
     }
   }
 
