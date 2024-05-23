@@ -7,9 +7,11 @@ import typography from "../../styles/typography";
 import DatePicker from "react-native-date-picker";
 import { format } from "date-fns";
 import { storageService } from "../../services/storage";
+import { updateReminderTime, useAppContext } from "../../context/AppContext";
 
 export const SetReminderModal = ({ visible, toggleModal }) => {
   const [date, setDate] = useState(new Date());
+  const { dispatch } = useAppContext();
 
   const handleUpdateReminder = async () => {
     // cancel all trigger notifications
@@ -32,7 +34,7 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       repeatFrequency: RepeatFrequency.DAILY,
     };
 
-    notifee.createTriggerNotification(
+    await notifee.createTriggerNotification(
       {
         title: "Workout Reminder",
         body: "Got time for a quick workout to fix your back?",
@@ -43,21 +45,27 @@ export const SetReminderModal = ({ visible, toggleModal }) => {
       trigger
     );
 
+    // updating app context
+    dispatch(updateReminderTime(date));
+
+    // save the reminder time to storage
+    storageService.set("dailyReminder", date.toISOString());
+
     console.log(
       "Daily Workout Reminder set to:",
       format(date, "hh:mm a"),
       "everyday."
     );
 
-    // save the reminder time to storage
-    storageService.set("dailyReminder", date.toISOString());
-
     toggleModal();
   };
 
   const handleRemoveReminder = async () => {
     await notifee.cancelTriggerNotifications();
+
     storageService.delete("dailyReminder");
+    dispatch(updateReminderTime(null));
+
     console.log("Daily Workout Reminder removed");
     toggleModal();
   };

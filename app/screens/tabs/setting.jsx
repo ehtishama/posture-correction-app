@@ -16,6 +16,7 @@ import { STACK_ROUTES } from "../../navigation/Routes";
 import { useNavigation } from "@react-navigation/native";
 import { SetReminderModal } from "../../components/modals/SetReminderModal";
 import { storageService } from "../../services/storage";
+import { useAppContext } from "../../context/AppContext";
 
 const SECTIONS = [
   {
@@ -26,10 +27,10 @@ const SECTIONS = [
         label: "Daily Reminder",
         icon: "bell-outline",
         modal: SetReminderModal,
-        secondaryText:
-          (storageService.exists("dailyReminder") &&
-            format(new Date(storageService.get("dailyReminder")), "hh:mm a")) ||
-          null,
+        secondaryText: (appContext) =>
+          (appContext.preferences.reminderTime &&
+            format(appContext.preferences.reminderTime, "hh:mm a")) ||
+          "Not set",
       },
     ],
   },
@@ -73,13 +74,15 @@ export default function SettingScreen() {
         ))}
 
         <Spacer />
-        <Text>App version 1.0.0</Text>
+        <Text>App version 1.0.3</Text>
       </ScrollView>
     </ScreenLayout>
   );
 }
 
-const SettingItem = ({ item, isLast }) => {
+const SettingItem = ({ item }) => {
+  const { appContext } = useAppContext();
+
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const isLink = item.type === "link";
@@ -105,7 +108,7 @@ const SettingItem = ({ item, isLast }) => {
 
         {item.secondaryText && (
           <Text style={[typography.bodySmall, { marginLeft: "auto" }]}>
-            {item.secondaryText}
+            {item.secondaryText(appContext)}
           </Text>
         )}
 

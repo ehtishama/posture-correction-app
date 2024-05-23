@@ -1,7 +1,7 @@
 /**
  * Tracking Service
  *
- * It is responsible for all the logic regarding workout tracking and analytics.
+ * It is responsible for all the logic regarding workout activity tracking and analytics.
  *
  * Dependencies:
  *  StorageService: To store and fetch workout data.

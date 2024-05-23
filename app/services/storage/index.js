@@ -40,6 +40,7 @@ class Storage {
     const jsonValue = JSON.stringify(value);
     this.storage.set(key, jsonValue);
   }
+
   /**
    *
    * @param {string} key

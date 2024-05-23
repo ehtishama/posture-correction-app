@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import notifee, { EventType } from "@notifee/react-native";
 import { useEffect, useState } from "react";
 import mobileAds from "react-native-google-mobile-ads";
+import { AppContextProvider } from "./app/context/AppContext";
 
 // Initialize the Google Mobile Ads SDK
 mobileAds().initialize();
@@ -63,7 +64,9 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <RootNavigation />
+        <AppContextProvider>
+          <RootNavigation />
+        </AppContextProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
