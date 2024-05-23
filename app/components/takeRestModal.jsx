@@ -50,19 +50,14 @@ const TakeRestModal = ({
   }, []);
 
   return (
-    <Modal visible={true}>
-      {/*
-
-      <TouchableOpacity onPress={onRestComplete}>
+    <Modal visible={true} onRequestClose={onRestComplete}>
+      <TouchableOpacity onPress={onRestComplete} style={styles.closeButton}>
         <MaterialCommunityIcons
           name="close"
           size={28}
-          color="black"
-          style={styles.closeButton}
+          style={styles.closeButtonIcon}
         />
       </TouchableOpacity>
-      
-      */}
 
       <View style={styles.container}>
         <View style={styles.content}>
@@ -114,10 +109,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 24,
     right: 24,
-    backgroundColor: colors.primary_1,
-    color: colors.primary_50,
+    zIndex: 1,
     padding: 8,
-    borderRadius: 4,
+    backgroundColor: colors.primary_1,
+  },
+  closeButtonIcon: {
+    // backgroundColor: colors.primary_1,
+    color: colors.primary_50,
   },
   footer: {
     position: "relative",
