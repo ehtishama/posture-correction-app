@@ -7,12 +7,22 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import typography from "../styles/typography";
 
 import { format } from "date-fns";
-
-const weeklyData = datetimeUtils
-  .getLast7Days(new Date())
-  .map((day) => ({ day, workouts: trackingService.getWorkoutsByDate(day) }));
+import { useAppContext } from "../context/AppContext";
 
 export default function WeeklyStreak() {
+  const {
+    appContext: { activity },
+  } = useAppContext();
+
+  console.log("Activity: ", activity);
+  const weeklyData = datetimeUtils.getLast7Days(new Date()).map((day) => ({
+    day,
+    workouts: trackingService.getWorkoutsByDate(
+      activity.completedWorkouts,
+      day
+    ),
+  }));
+
   return (
     <View>
       <View style={styles.weekly_history}>

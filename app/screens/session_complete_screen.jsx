@@ -6,8 +6,12 @@ import Button from "../components/button";
 import { colors } from "../styles/colors";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import trackingService from "../services/tracking";
+import { addWorkout, useAppContext } from "../context/AppContext";
+import { add } from "date-fns";
 
 const SessionCompleteScreen = () => {
+  const { dispatch } = useAppContext();
+
   const navigation = useNavigation();
   const { params } = useRoute();
   const animation = React.useRef(null);
@@ -23,6 +27,9 @@ const SessionCompleteScreen = () => {
         track: trackId,
         createdAt: Date.now(),
       };
+
+      //record the workout in the app context
+      dispatch(addWorkout(workout));
       trackingService.addCompletedWorkout(workout);
     }
   }, []);

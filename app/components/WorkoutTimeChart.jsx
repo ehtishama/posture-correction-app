@@ -9,6 +9,7 @@ import { datetimeUtils } from "../utils/datetime";
 import { format } from "date-fns";
 import trackingService from "../services/tracking";
 import { getTrackDuration } from "../data/utils";
+import { useAppContext } from "../context/AppContext";
 
 const _data = [
   { day: "Sunday", workout_time: 60 },
@@ -19,19 +20,23 @@ const _data = [
   { day: "Friday", workout_time: 60 },
 ];
 
-const data = datetimeUtils.getLast7Days().map((x) => ({
-  day: format(x, "eee"),
-  workout_time: trackingService
-    .getWorkoutsByDate(x)
-    .reduce(
-      (acc, curr) => acc + Math.ceil(getTrackDuration(curr.track) / 60),
-      0
-    ),
-}));
-
 const totalTimeSpent = trackingService.totalTimeExercisedLastWeek();
 
 export default function WorkoutTimeChart() {
+  const {
+    appContext: { activity },
+  } = useAppContext();
+
+  const data = datetimeUtils.getLast7Days().map((x) => ({
+    day: format(x, "eee"),
+    workout_time: trackingService
+      .getWorkoutsByDate(activity.completedWorkouts, x)
+      .reduce(
+        (acc, curr) => acc + Math.ceil(getTrackDuration(curr.track) / 60),
+        0
+      ),
+  }));
+
   const font = useFont(SpaceGrotesk, 12);
 
   return (
