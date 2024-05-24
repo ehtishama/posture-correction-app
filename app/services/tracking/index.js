@@ -76,8 +76,9 @@ class TrackingService {
    * @param {Date} endDate
    * @returns {Object[]}
    */
-  totalWorkoutsCompleted(startDate, endDate) {
-    const workouts = this.getAllCompletedWorkouts();
+  totalWorkoutsCompleted(startDate, endDate, workouts = null) {
+    if (!workouts) workouts = this.getAllCompletedWorkouts();
+
     return workouts.filter((workout) =>
       isWithinInterval(workout.createdAt, {
         start: startDate,
@@ -89,33 +90,41 @@ class TrackingService {
   /**
    * @returns {Object[]}
    */
-  totalWorkoutsCompletedLastWeek() {
+  totalWorkoutsCompletedLastWeek(workouts = null) {
+    if (!workouts) workouts = this.getAllCompletedWorkouts();
+
     const today = endOfToday();
-    return this.totalWorkoutsCompleted(subDays(today, 7), today);
+    return this.totalWorkoutsCompleted(subDays(today, 7), today, workouts);
   }
 
   /**
    * @param {Date} startDate
    * @param {Date} endDate
+   * @param {Object[]} workouts
    * @returns {Number} Time exercised in the date range given by startDate and endDate params.
    */
-  totalTimeExercised(startDate, endDate) {
+  totalTimeExercised(startDate, endDate, workouts = null) {
     const interval = {
       start: startDate,
       end: endDate,
     };
 
-    return this.getAllCompletedWorkouts()
+    if (!workouts) workouts = this.getAllCompletedWorkouts();
+
+    return workouts
       .filter((workout) => isWithinInterval(workout.createdAt, interval))
       .reduce((acc, curr) => acc + getTrackDuration(curr.track), 0);
   }
 
   /**
+   * @param {Object[]} workouts
    * @returns {Number} Time exercised in the last week starting from today.
    */
-  totalTimeExercisedLastWeek() {
+  totalTimeExercisedLastWeek(workouts = null) {
     const today = endOfToday();
-    return this.totalTimeExercised(subDays(today, 7), today);
+    if (!workouts) workouts = this.getAllCompletedWorkouts();
+
+    return this.totalTimeExercised(subDays(today, 7), today, workouts);
   }
 }
 // getAverageWorkoutsPerWeek()

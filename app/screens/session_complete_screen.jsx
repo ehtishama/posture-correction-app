@@ -7,7 +7,6 @@ import { colors } from "../styles/colors";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import trackingService from "../services/tracking";
 import { addWorkout, useAppContext } from "../context/AppContext";
-import { add } from "date-fns";
 
 const SessionCompleteScreen = () => {
   const { dispatch } = useAppContext();

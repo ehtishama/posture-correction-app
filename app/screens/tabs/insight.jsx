@@ -6,9 +6,16 @@ import { colors } from "../../styles/colors";
 import typography from "../../styles/typography";
 import WorkoutTimeChart from "../../components/WorkoutTimeChart";
 import trackingService from "../../services/tracking";
+import { useAppContext } from "../../context/AppContext";
 
 export default function InsightScreen() {
-  const timeExercised = trackingService.totalTimeExercisedLastWeek();
+  const {
+    appContext: { activity },
+  } = useAppContext();
+
+  const timeExercised = trackingService.totalTimeExercisedLastWeek(
+    activity.completedWorkouts
+  );
 
   return (
     <ScreenLayout
@@ -37,7 +44,9 @@ export default function InsightScreen() {
 
           <View style={styles.stat_card}>
             <Text style={[typography.titleLarge, styles.on_primary]}>
-              {trackingService.totalWorkoutsCompletedLastWeek()}
+              {trackingService.totalWorkoutsCompletedLastWeek(
+                activity.completedWorkouts
+              )}
               <Text style={typography.bodyMedium}> </Text>
             </Text>
             <Text style={styles.on_primary}>workouts completed</Text>
